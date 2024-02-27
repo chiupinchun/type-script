@@ -5,5 +5,5 @@ export interface IController {
     z: number
   }
   rotation: number
-  action?: 'walk' | 'attack'
+  action?: 'attack' | 'dash'
 }
