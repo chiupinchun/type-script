@@ -1,9 +1,10 @@
-import { useAnimations, useGLTF } from '@react-three/drei'
+import { Html, useAnimations, useGLTF } from '@react-three/drei'
 import React, { FC, useEffect, useReducer, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { Mesh } from 'three'
 import { useSelector } from '@/store'
 import { getControllerReducer, initialcontroller } from './moveReducer'
+import VirtualKeyboard from '../helper/virtualKeyboard'
 
 interface Props {
   src: string
@@ -51,6 +52,9 @@ const Player: FC<Props> = ({ src }) => {
 
   return (
     <>
+      <Html>
+        <VirtualKeyboard />
+      </Html>
       <mesh ref={meshRef}>
         <primitive object={gltf.scene} />
       </mesh>
