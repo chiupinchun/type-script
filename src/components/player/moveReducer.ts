@@ -1,8 +1,8 @@
 import { baseKeyboard } from "@/store/keyboard"
-import { IController } from "@/types/controller"
+import { IMovingController } from "@/types/player"
 import { getReverseDirection, mergeDeg } from "@/utils/direction"
 
-export const initialcontroller: IController & {
+export const initialData: IMovingController & {
   keyboardStatus: Record<KeyboardEvent['key'], boolean>
 } = {
   keyboardStatus: {},
@@ -10,8 +10,8 @@ export const initialcontroller: IController & {
   rotation: 0
 }
 
-export const getControllerReducer = (keyboard: typeof baseKeyboard): React.Reducer<
-  typeof initialcontroller,
+export const getDirectReducer = (keyboard: typeof baseKeyboard): React.Reducer<
+  typeof initialData,
   { key: KeyboardEvent['key'], switch: boolean }
 > => {
   return (state, action) => {

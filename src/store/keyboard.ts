@@ -7,7 +7,10 @@ const initialState = {
   right: 'd',
 
   attack: 'j',
-  dash: 'k'
+  dash: 'k',
+  sk1: 'u',
+  sk2: 'i',
+  sk3: 'o'
 }
 export const baseKeyboard = initialState
 export const counterSlice = createSlice({
