@@ -1,11 +1,11 @@
-import { KeyboardOpts } from "@/types/controller";
+import { baseKeyboard } from "@/store/keyboard"
 
-export const getReverseDirection = (direction: KeyboardOpts) => {
+export const getReverseDirection = (direction: keyof typeof baseKeyboard, keyboard: typeof baseKeyboard) => {
   switch (direction) {
-    case KeyboardOpts.front: return KeyboardOpts.back
-    case KeyboardOpts.right: return KeyboardOpts.left
-    case KeyboardOpts.back: return KeyboardOpts.front
-    case KeyboardOpts.left: return KeyboardOpts.right
+    case keyboard.front: return keyboard.back
+    case keyboard.right: return keyboard.left
+    case keyboard.back: return keyboard.front
+    case keyboard.left: return keyboard.right
     default: return direction
   }
 }

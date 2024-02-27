@@ -1,13 +1,3 @@
-export enum KeyboardOpts {
-  front = 'w',
-  right = 'd',
-  back = 's',
-  left = 'a',
-
-  attack = 'j',
-  dash = 'k'
-}
-
 export interface IController {
   direction: {
     x: number

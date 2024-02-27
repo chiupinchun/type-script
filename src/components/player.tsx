@@ -1,9 +1,11 @@
 import { useAnimations, useGLTF } from '@react-three/drei'
 import React, { FC, useEffect, useReducer, useRef } from 'react'
-import { KeyboardOpts, IController } from '@/types/controller'
+import { IController } from '@/types/controller'
 import { useFrame } from '@react-three/fiber'
 import { Mesh } from 'three'
 import { getReverseDirection, mergeDeg } from '@/utils/direction'
+import { useSelector } from '@/store'
+import { baseKeyboard } from '@/store/keyboard'
 
 const initialcontroller: IController & {
   keyboardStatus: Record<KeyboardEvent['key'], boolean>
@@ -12,51 +14,53 @@ const initialcontroller: IController & {
   direction: { x: 0, y: 0, z: 0 },
   rotation: 0
 }
-const controllerReducer: React.Reducer<
+const getControllerReducer = (keyboard: typeof baseKeyboard): React.Reducer<
   typeof initialcontroller,
   { key: KeyboardEvent['key'], switch: boolean }
-> = (state, action) => {
-  const setMoveDirect = (direct: 'x' | 'y' | 'z', value: number) => {
-    if (action.switch) {
-      state.direction[direct] = value
-    } else {
-      const reverseKey = getReverseDirection(action.key as KeyboardOpts)
-      const isReverseKeyPressing = state.keyboardStatus[reverseKey]
-      if (isReverseKeyPressing) {
-        state.direction[direct] = -1 * value
+> => {
+  return (state, action) => {
+    const setMoveDirect = (direct: 'x' | 'y' | 'z', value: number) => {
+      if (action.switch) {
+        state.direction[direct] = value
       } else {
-        state.direction[direct] = 0
+        const reverseKey = getReverseDirection(action.key as keyof typeof keyboard, keyboard)
+        const isReverseKeyPressing = state.keyboardStatus[reverseKey]
+        if (isReverseKeyPressing) {
+          state.direction[direct] = -1 * value
+        } else {
+          state.direction[direct] = 0
+        }
       }
     }
-  }
 
-  switch (action.key) {
-    case KeyboardOpts.front:
-      setMoveDirect('z', 1)
-      break
-    case KeyboardOpts.right:
-      setMoveDirect('x', -1)
-      break
-    case KeyboardOpts.back:
-      setMoveDirect('z', -1)
-      break
-    case KeyboardOpts.left:
-      setMoveDirect('x', 1)
-      break
-    default:
-  }
-  state.keyboardStatus[action.key] = action.switch
+    switch (action.key) {
+      case keyboard.front:
+        setMoveDirect('z', 1)
+        break
+      case keyboard.right:
+        setMoveDirect('x', -1)
+        break
+      case keyboard.back:
+        setMoveDirect('z', -1)
+        break
+      case keyboard.left:
+        setMoveDirect('x', 1)
+        break
+      default:
+    }
+    state.keyboardStatus[action.key] = action.switch
 
-  const rotations = []
-  if (state.direction.x > 0) { rotations.push(120) }
-  if (state.direction.x < 0) { rotations.push(240) }
-  if (state.direction.z > 0) { rotations.push(0) }
-  if (state.direction.z < 0) { rotations.push(180) }
-  if (rotations.length) {
-    state.rotation = rotations.reduce((total, item) => mergeDeg(total, item))
-  }
+    const rotations = []
+    if (state.direction.x > 0) { rotations.push(120) }
+    if (state.direction.x < 0) { rotations.push(240) }
+    if (state.direction.z > 0) { rotations.push(0) }
+    if (state.direction.z < 0) { rotations.push(180) }
+    if (rotations.length) {
+      state.rotation = rotations.reduce((total, item) => mergeDeg(total, item))
+    }
 
-  return state
+    return state
+  }
 }
 
 interface Props {
@@ -65,7 +69,8 @@ interface Props {
 }
 
 const Player: FC<Props> = ({ src }) => {
-  const [controller, dispatChcontroller] = useReducer(controllerReducer, initialcontroller)
+  const keyboard = useSelector(state => state.keyboard)
+  const [controller, dispatChcontroller] = useReducer(getControllerReducer(keyboard), initialcontroller)
 
   const gltf = useGLTF(src)
   const { actions } = useAnimations(gltf.animations, gltf.scene)
@@ -92,7 +97,7 @@ const Player: FC<Props> = ({ src }) => {
     meshRef.current.rotation.y = controller.rotation * Math.PI / 180
 
     if (actions.walk) {
-      const isWalking = Object.values(KeyboardOpts)
+      const isWalking = [keyboard.front, keyboard.left, keyboard.back, keyboard.right]
         .some(key => controller.keyboardStatus[key])
       if (isWalking) {
         actions.walk.play()
