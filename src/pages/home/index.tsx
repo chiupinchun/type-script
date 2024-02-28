@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Canvas } from '@react-three/fiber'
-import Player from '@/components/player'
+import Player from '@/components/models/player'
 
 interface Props { }
 

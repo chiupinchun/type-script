@@ -5,7 +5,7 @@ import { Mesh } from 'three'
 import { useSelector } from '@/store'
 import * as movingController from './moveReducer'
 import * as skillController from './skillReducer'
-import VirtualKeyboard from '../helper/virtualKeyboard'
+import VirtualKeyboard from '../../helper/virtualKeyboard'
 import { switchAction } from '@/utils/animate'
 import { BASE_ATTACK_SPEED, DASH_SPEED } from '@/game/constants/battle'
 import { useAsyncReducer } from '@/hooks/useAsyncReducer'
@@ -41,6 +41,7 @@ const Player: FC<Props> = ({ src }) => {
   useEffect(() => {
     window.addEventListener('keydown', onKeydown)
     window.addEventListener('keyup', onKeyup)
+    actions.standby?.play()
     return () => {
       window.removeEventListener('keydown', onKeydown)
       window.removeEventListener('keyup', onKeyup)
