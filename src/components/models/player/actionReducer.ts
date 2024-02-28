@@ -12,7 +12,7 @@ export const initialData: IMovingController & {
   action: 'standby'
 }
 
-export const getDirectReducer = (keyboard: typeof baseKeyboard): React.Reducer<
+export const getActionReducer = (keyboard: typeof baseKeyboard): React.Reducer<
   typeof initialData,
   {
     key: KeyboardEvent['key'] | 'update',

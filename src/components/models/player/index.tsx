@@ -1,7 +1,7 @@
 import { Html } from '@react-three/drei'
 import React, { FC, useEffect, useReducer } from 'react'
 import { useSelector } from '@/store'
-import { getDirectReducer, initialData } from './moveReducer'
+import { getActionReducer, initialData } from './actionReducer'
 import VirtualKeyboard from '../../helper/virtualKeyboard'
 import Movable, { MovableCtx } from '@/components/models/movable'
 import { DASH_SPEED } from '@/game/constants/battle'
@@ -14,16 +14,16 @@ interface Props {
 const Player: FC<Props> = ({ ...props }) => {
   const keyboard = useSelector(state => state.keyboard)
 
-  const [movingState, dispatchMovingState] = useReducer(
-    getDirectReducer(keyboard),
+  const [actionState, dispatchActionState] = useReducer(
+    getActionReducer(keyboard),
     initialData
   )
 
   const onKeydown = ({ key }: KeyboardEvent) => {
-    dispatchMovingState({ key, switch: true })
+    dispatchActionState({ key, switch: true })
   }
   const onKeyup = ({ key }: KeyboardEvent) => {
-    dispatchMovingState({ key, switch: false })
+    dispatchActionState({ key, switch: false })
   }
   useEffect(() => {
     window.addEventListener('keydown', onKeydown)
@@ -36,14 +36,14 @@ const Player: FC<Props> = ({ ...props }) => {
 
   const onNextFrame = (ctx: MovableCtx) => {
     if (ctx.acceleration === DASH_SPEED) {
-      dispatchMovingState({
+      dispatchActionState({
         key: 'update',
         switch: false,
         newState: { acceleration: initialData.acceleration }
       })
     }
     if (ctx.action === 'attack') {
-      dispatchMovingState({
+      dispatchActionState({
         key: 'update',
         switch: false,
         newState: { action: 'standby' }
@@ -57,9 +57,9 @@ const Player: FC<Props> = ({ ...props }) => {
         <VirtualKeyboard />
       </Html>
       <Movable {...props}
-        direction={movingState.direction}
-        acceleration={movingState.acceleration}
-        action={movingState.action}
+        direction={actionState.direction}
+        acceleration={actionState.acceleration}
+        action={actionState.action}
         onNextFrame={onNextFrame}
       />
     </>
