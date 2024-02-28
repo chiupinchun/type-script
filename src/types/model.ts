@@ -1,0 +1,1 @@
+export type actions = 'attack' | 'walk' | undefined

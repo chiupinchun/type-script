@@ -1,6 +1,6 @@
 import { baseKeyboard } from "@/store/keyboard"
 import { IMovingController } from "@/types/player"
-import { getReverseDirection, mergeDeg } from "@/utils/direction"
+import { getReverseDirection, offsetToDeg } from "@/utils/direction"
 
 export const initialData: IMovingController & {
   keyboardStatus: Record<KeyboardEvent['key'], boolean>
@@ -45,14 +45,16 @@ export const getDirectReducer = (keyboard: typeof baseKeyboard): React.Reducer<
     }
     state.keyboardStatus[action.key] = action.switch
 
-    const rotations = []
-    if (state.direction.x > 0) { rotations.push(120) }
-    if (state.direction.x < 0) { rotations.push(240) }
-    if (state.direction.z > 0) { rotations.push(0) }
-    if (state.direction.z < 0) { rotations.push(180) }
-    if (rotations.length) {
-      state.rotation = rotations.reduce((total, item) => mergeDeg(total, item))
-    }
+    // const rotations = []
+    // if (state.direction.x > 0) { rotations.push(120) }
+    // if (state.direction.x < 0) { rotations.push(240) }
+    // if (state.direction.z > 0) { rotations.push(0) }
+    // if (state.direction.z < 0) { rotations.push(180) }
+    // if (rotations.length) {
+    //   state.rotation = rotations.reduce((total, item) => mergeDeg(total, item))
+    // }
+    const deg = offsetToDeg(state.direction.x, state.direction.z)
+    if (deg !== null) { state.rotation = deg }
 
     return state
   }

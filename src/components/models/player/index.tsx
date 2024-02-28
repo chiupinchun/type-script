@@ -79,7 +79,7 @@ const Player: FC<Props> = ({ src }) => {
     meshRef.current.position.y += movingState.direction.y * delta
     meshRef.current.position.z += movingState.direction.z * delta
 
-    meshRef.current.rotation.y = movingState.rotation * Math.PI / 180
+    meshRef.current.rotation.y = movingState.rotation
 
     if (actions.walk) {
       const isWalking = [keyboard.front, keyboard.left, keyboard.back, keyboard.right]
