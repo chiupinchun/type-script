@@ -36,14 +36,24 @@ const Player: FC<Props> = ({ ...props }) => {
 
   const onNextFrame = (ctx: MovableCtx) => {
     if (ctx.acceleration === DASH_SPEED) {
-      dispatchMovingState({ key: 'acceleration', switch: false })
+      dispatchMovingState({
+        key: 'update',
+        switch: false,
+        newState: { acceleration: initialData.acceleration }
+      })
+    }
+    if (ctx.action === 'attack') {
+      dispatchMovingState({
+        key: 'update',
+        switch: false,
+        newState: { action: 'standby' }
+      })
     }
   }
 
   return (
     <>
       <Html>
-        {movingState.acceleration}
         <VirtualKeyboard />
       </Html>
       <Movable {...props}

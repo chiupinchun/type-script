@@ -14,9 +14,17 @@ export const initialData: IMovingController & {
 
 export const getDirectReducer = (keyboard: typeof baseKeyboard): React.Reducer<
   typeof initialData,
-  { key: KeyboardEvent['key'] | 'acceleration', switch: boolean }
+  {
+    key: KeyboardEvent['key'] | 'update',
+    switch: boolean,
+    newState?: Partial<typeof initialData>
+  }
 > => {
   return (state, action) => {
+    if (action.key === 'update') {
+      return Object.assign(state, action.newState)
+    }
+
     const setMoveDirect = (direct: 'x' | 'y' | 'z', value: number) => {
       if (action.switch) {
         state.direction[direct] = value
@@ -44,9 +52,6 @@ export const getDirectReducer = (keyboard: typeof baseKeyboard): React.Reducer<
       case keyboard.left:
         setMoveDirect('x', 1)
         break
-
-      case 'acceleration':
-        state.acceleration = action.switch ? DASH_SPEED : initialData.acceleration
     }
     state.keyboardStatus[action.key] = action.switch
 
