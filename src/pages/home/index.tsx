@@ -18,7 +18,7 @@ const Home: FC<Props> = () => {
           <ambientLight intensity={Math.PI / 2} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
           <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
-          <Player src='/models/magic-spirit.glb' />
+          <Player src='/models/magic-spirit.glb' rawPosition={[0, 0, 0]} />
         </Canvas>
       </div>
     </>

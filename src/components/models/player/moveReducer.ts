@@ -1,18 +1,20 @@
+import { DASH_SPEED } from "@/game/constants/battle"
 import { baseKeyboard } from "@/store/keyboard"
 import { IMovingController } from "@/types/player"
-import { getReverseDirection, offsetToDeg } from "@/utils/direction"
+import { getReverseDirection } from "@/utils/direction"
 
 export const initialData: IMovingController & {
   keyboardStatus: Record<KeyboardEvent['key'], boolean>
 } = {
   keyboardStatus: {},
   direction: { x: 0, y: 0, z: 0 },
-  rotation: 0
+  acceleration: 1,
+  action: 'standby'
 }
 
 export const getDirectReducer = (keyboard: typeof baseKeyboard): React.Reducer<
   typeof initialData,
-  { key: KeyboardEvent['key'], switch: boolean }
+  { key: KeyboardEvent['key'] | 'acceleration', switch: boolean }
 > => {
   return (state, action) => {
     const setMoveDirect = (direct: 'x' | 'y' | 'z', value: number) => {
@@ -42,20 +44,27 @@ export const getDirectReducer = (keyboard: typeof baseKeyboard): React.Reducer<
       case keyboard.left:
         setMoveDirect('x', 1)
         break
+
+      case 'acceleration':
+        state.acceleration = action.switch ? DASH_SPEED : initialData.acceleration
     }
     state.keyboardStatus[action.key] = action.switch
 
-    // const rotations = []
-    // if (state.direction.x > 0) { rotations.push(120) }
-    // if (state.direction.x < 0) { rotations.push(240) }
-    // if (state.direction.z > 0) { rotations.push(0) }
-    // if (state.direction.z < 0) { rotations.push(180) }
-    // if (rotations.length) {
-    //   state.rotation = rotations.reduce((total, item) => mergeDeg(total, item))
-    // }
-    const deg = offsetToDeg(state.direction.x, state.direction.z)
-    if (deg !== null) { state.rotation = deg }
+    // skills only trigger when keydown
+    if (action.switch) {
+      switch (action.key) {
+        case keyboard.attack:
+        case keyboard.sk1:
+        case keyboard.sk2:
+        case keyboard.sk3:
+          state.action = 'attack'
+          break
+        case keyboard.dash:
+          state.acceleration = DASH_SPEED
+          break
+      }
+    }
 
-    return state
+    return { ...state }
   }
 }

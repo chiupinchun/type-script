@@ -1,1 +1,1 @@
-export type actions = 'attack' | 'walk' | undefined
+export type modelActions = 'attack' | 'walk' | 'standby'

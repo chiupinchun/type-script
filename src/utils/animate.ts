@@ -1,11 +1,11 @@
-import { actions } from "@/types/model";
+import { modelActions } from "@/types/model";
 import { AnimationAction } from "three";
 
 export const switchAction = (
   options: {
     [x: string]: AnimationAction | null;
   },
-  action?: actions
+  action?: modelActions
 ) => {
   for (const key in options) {
     if (key === action) { options[key]?.play() }
