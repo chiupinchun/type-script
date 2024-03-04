@@ -4,7 +4,7 @@ import { switchAction } from '@/utils/animate'
 import { offsetToDeg } from '@/utils/direction'
 import { useAnimations, useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import React, { FC, useRef } from 'react'
+import React, { FC, useEffect, useRef } from 'react'
 import { Mesh } from 'three'
 
 export interface MovableCtx extends IMovingController {
@@ -15,7 +15,10 @@ export interface MovableCtx extends IMovingController {
 }
 
 const Movable: FC<MovableCtx> = ({
-  src, rawPosition, direction, acceleration, action,
+  src, rawPosition,
+  direction = { x: 0, y: 0, z: 0 },
+  acceleration = 1,
+  action,
   onNextFrame = () => { }
 }) => {
 
@@ -26,12 +29,16 @@ const Movable: FC<MovableCtx> = ({
 
   const attackTimeout = useRef<NodeJS.Timeout>()
 
+  useEffect(() => {
+    actions.standby?.play()
+  }, [])
+
   useFrame((_, delta) => {
     if (!meshRef.current) { return }
 
     switch (action) {
-      case undefined:
-        switchAction(actions, 'standby')
+      case 'standby':
+        // switchAction(actions, 'standby')
         break
       case 'attack':
         if (attackTimeout.current) { clearTimeout(attackTimeout.current) }
@@ -52,7 +59,7 @@ const Movable: FC<MovableCtx> = ({
       meshRef.current.position.z += direction.z * acceleration * delta
     }
     if (direction.x || direction.z) {
-      actions.walk?.play()
+      switchAction(actions, 'walk')
     } else {
       actions.walk?.stop()
     }
@@ -67,7 +74,7 @@ const Movable: FC<MovableCtx> = ({
 
   return (
     <>
-      <mesh position={rawPosition} ref={meshRef}>
+      <mesh position={rawPosition} ref={meshRef} rotation={[0, 90 * Math.PI / 2, 0]}>
         <primitive object={gltf.scene} />
       </mesh>
     </>

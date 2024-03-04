@@ -1,3 +1,4 @@
+import { CANT_STOP_ACTIONS } from "@/game/constants/battle";
 import { modelActions } from "@/types/model";
 import { AnimationAction } from "three";
 
@@ -9,6 +10,6 @@ export const switchAction = (
 ) => {
   for (const key in options) {
     if (key === action) { options[key]?.play() }
-    else { options[key]?.stop() }
+    else { !CANT_STOP_ACTIONS.includes(key as modelActions) && options[key]?.stop() }
   }
 }
