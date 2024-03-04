@@ -1,6 +1,6 @@
 import { DASH_SPEED } from "@/game/constants/battle"
 import { baseKeyboard } from "@/store/keyboard"
-import { IMovingController } from "@/types/player"
+import { IMovingController } from "@/types/model"
 import { getReverseDirection } from "@/utils/direction"
 
 export const initialData: IMovingController & {

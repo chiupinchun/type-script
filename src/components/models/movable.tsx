@@ -1,5 +1,5 @@
 import { BASE_ATTACK_SPEED } from '@/game/constants/battle'
-import { IMovingController } from '@/types/player'
+import { IMovingController } from '@/types/model'
 import { switchAction } from '@/utils/animate'
 import { offsetToDeg } from '@/utils/direction'
 import { useAnimations, useGLTF } from '@react-three/drei'
@@ -7,9 +7,11 @@ import { useFrame } from '@react-three/fiber'
 import React, { FC, useEffect, useRef } from 'react'
 import { Mesh } from 'three'
 
-export interface MovableCtx extends IMovingController {
+export interface MovableCtx extends Partial<IMovingController> {
   src: string
   rawPosition: [number, number, number]
+
+  isPlayer?: true
 
   onNextFrame?: (ctx: MovableCtx) => void
 }
@@ -19,6 +21,7 @@ const Movable: FC<MovableCtx> = ({
   direction = { x: 0, y: 0, z: 0 },
   acceleration = 1,
   action,
+  isPlayer,
   onNextFrame = () => { }
 }) => {
 
@@ -33,7 +36,7 @@ const Movable: FC<MovableCtx> = ({
     actions.standby?.play()
   }, [])
 
-  useFrame((_, delta) => {
+  useFrame(({ camera }, delta) => {
     if (!meshRef.current) { return }
 
     switch (action) {
@@ -50,13 +53,19 @@ const Movable: FC<MovableCtx> = ({
     }
 
     if (direction.x) {
-      meshRef.current.position.x += direction.x * acceleration * delta
+      const deltaX = direction.x * acceleration * delta
+      meshRef.current.position.x += deltaX
+      if (isPlayer) { camera.position.x += deltaX }
     }
     if (direction.y) {
-      meshRef.current.position.y += direction.y * acceleration * delta
+      const deltaY = direction.y * acceleration * delta
+      meshRef.current.position.y += deltaY
+      if (isPlayer) { camera.position.y += deltaY }
     }
     if (direction.z) {
-      meshRef.current.position.z += direction.z * acceleration * delta
+      const deltaZ = direction.z * acceleration * delta
+      meshRef.current.position.z += deltaZ
+      if (isPlayer) { camera.position.z += deltaZ }
     }
     if (direction.x || direction.z) {
       switchAction(actions, 'walk')

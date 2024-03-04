@@ -61,6 +61,7 @@ const Player: FC<Props> = ({ ...props }) => {
         acceleration={actionState.acceleration}
         action={actionState.action}
         onNextFrame={onNextFrame}
+        isPlayer
       />
     </>
   )
