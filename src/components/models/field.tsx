@@ -4,7 +4,7 @@ interface FieldProps {
   range: [number, number]
   position: [number, number, number]
 }
-const Field: FC<FieldProps> = ({ range, position }) => {
+const Plane: FC<FieldProps> = ({ range, position }) => {
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={position} receiveShadow>
       <planeGeometry args={range} />
@@ -16,7 +16,7 @@ const Field: FC<FieldProps> = ({ range, position }) => {
 interface Props extends FieldProps {
   FieldItem: FC<{ range: [number, number] }>
 }
-const GrassField: FC<Props> = ({ FieldItem, ...fieldProps }) => {
+const Field: FC<Props> = React.memo(({ FieldItem, ...fieldProps }) => {
   const numberOfItems = fieldProps.range[0] * fieldProps.range[1] / 5
 
   return (
@@ -24,9 +24,9 @@ const GrassField: FC<Props> = ({ FieldItem, ...fieldProps }) => {
       {[...Array(numberOfItems)].map((_, index) => (
         <FieldItem range={fieldProps.range} key={index} />
       ))}
-      <Field {...fieldProps} />
+      <Plane {...fieldProps} />
     </group>
   );
-};
+});
 
-export default GrassField
+export default Field
