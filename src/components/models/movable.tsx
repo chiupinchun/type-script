@@ -10,6 +10,7 @@ import { Mesh } from 'three'
 export interface MovableCtx extends Partial<IMovingController> {
   src: string
   rawPosition: [number, number, number]
+  rawRotation: number
 
   isPlayer?: true
 
@@ -19,6 +20,7 @@ export interface MovableCtx extends Partial<IMovingController> {
 const Movable: FC<MovableCtx> = ({
   src, rawPosition,
   direction = { x: 0, y: 0, z: 0 },
+  rawRotation = 90,
   acceleration = 1,
   action,
   isPlayer,
@@ -73,17 +75,17 @@ const Movable: FC<MovableCtx> = ({
       actions.walk?.stop()
     }
 
-    const deg = offsetToDeg(direction.x, direction.z)
-    if (deg !== null) { meshRef.current.rotation.y = deg }
+    // const deg = offsetToDeg(direction.x, direction.z)
+    // if (deg !== null) { meshRef.current.rotation.y = deg }
 
     onNextFrame({
-      src, rawPosition, direction, acceleration, action
+      src, rawPosition, direction, acceleration, action, rawRotation
     })
   })
 
   return (
     <>
-      <mesh position={rawPosition} ref={meshRef} rotation={[0, 90 * Math.PI / 2, 0]}>
+      <mesh position={rawPosition} ref={meshRef} rotation={[0, rawRotation * Math.PI / 180, 0]}>
         <primitive object={gltf.scene} />
       </mesh>
     </>
