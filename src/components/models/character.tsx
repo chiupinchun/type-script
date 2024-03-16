@@ -1,4 +1,4 @@
-import { ModelProgress } from '@/types/model'
+import { ModelProgress } from '@/hooks/useModelProgress'
 import { useAnimations, useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import React, { FC, useEffect, useRef } from 'react'
@@ -8,15 +8,13 @@ export interface MovableCtx {
   src: string
   position: [number, number, number]
   rotation: number
-  progresses: ModelProgress[]
-  setProgresses: (progresses: MovableCtx['progresses']) => void
+  progress: ModelProgress | null
 }
 
 const Movable: FC<MovableCtx> = ({
   src, position,
   rotation = 90,
-  progresses,
-  setProgresses
+  progress
 }) => {
 
   const gltf = useGLTF(src)
@@ -26,21 +24,20 @@ const Movable: FC<MovableCtx> = ({
 
   useEffect(() => {
     actions.standby?.play()
-  }, [])
+  }, [actions.standby])
 
-  useFrame((ctx, delta) => {
+  useFrame((ctx) => {
     if (!meshRef.current) { return }
 
-    const notExecProgresses: ModelProgress[] = []
-    progresses.forEach(progress => {
-      if (+new Date() >= progress.timestamp) {
-        progress.action(ctx, delta)
-      } else {
-        notExecProgresses.push(progress)
-      }
-    })
+    if (progress) {
+      progress.effect?.(meshRef.current, ctx)
 
-    setProgresses(notExecProgresses)
+      if (progress.action) {
+        Object.values(actions).forEach(action => action?.stop())
+        const currentAction = actions[progress.action] ?? actions.standby
+        currentAction!.play()
+      }
+    }
   })
 
   return (
