@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
-import Movable from '@/components/models/movable'
+import Movable from '@/components/models/character'
 import Grass from '@/components/models/field-items/grass'
 import Field from '@/components/models/field'
 import { ModelProgress } from '@/types/model'
