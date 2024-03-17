@@ -11,6 +11,9 @@ export interface ModelProgress {
   next: ModelProgress | null
 }
 
+/**
+ * Set position and lookAt of camera, resolve immediately.
+ */
 class CameraProgress implements ModelProgress {
   effect: ProgressEffect
   next: ModelProgress | null = null
@@ -29,6 +32,9 @@ class CameraProgress implements ModelProgress {
   }
 }
 
+/**
+ * Set action of model, resolve immediately.
+ */
 class ActionProgress implements ModelProgress {
   effect: ProgressEffect
   next: ModelProgress | null = null
@@ -41,6 +47,9 @@ class ActionProgress implements ModelProgress {
   }
 }
 
+/**
+ * keep moving model a few distance in 1 frame, until arriving, then resolve.
+ */
 class MoveProgress implements ModelProgress {
   effect: ProgressEffect
   next: ModelProgress | null = null
@@ -68,6 +77,9 @@ class MoveProgress implements ModelProgress {
   }
 }
 
+/**
+ * Set model action to attack for a while, then resolve.
+ */
 class AttackProgress implements ModelProgress {
   effect: ProgressEffect
   until?: number
@@ -86,6 +98,9 @@ class AttackProgress implements ModelProgress {
   }
 }
 
+/**
+ * Link linked lists.
+ */
 const link = (...linkable: (ModelProgress)[]) => {
   if (linkable.length < 2) { return linkable[0] ?? null }
 
@@ -99,6 +114,16 @@ const link = (...linkable: (ModelProgress)[]) => {
   return prevNode
 }
 
+/**
+ * Accepts resolve fn, self-position, target-position, and returns several linked list progresses.
+ * 
+ * Set state dispatcher to param: resolve, and pass progress to ally & enemy models.
+ * @param resolve Execute when current progress finished.
+ * Can be use to set next progress to react state.
+ * @param selfPosition Progress may change model position, so record raw position.
+ * @param targetPosition Record raw position.
+ * @returns Several linked lists which define actions model should do.
+ */
 export const useModelProgress = (
   resolve: () => void,
   selfPosition: [number, number, number],
