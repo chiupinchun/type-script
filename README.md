@@ -1,30 +1,41 @@
-# React + TypeScript + Vite
+# 標題未定
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 世界觀
 
-Currently, two official plugins are available:
+### 角色
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 分為`南波`、`史特林`、`安瑞`三個陣營，角色都是陣營對應的類的原型方法。
+  - 例如：史特林（String）陣營有`史普利特`（split）。
 
-## Expanding the ESLint configuration
+### 劇情
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- 主角為了尋找某個寶物，需要遍歷各陣營打聽情報。
+- 怪物是蟲（Bug），路上遇到蟲需要將其擊退。
 
-- Configure the top-level `parserOptions` property like this:
+## 角色養成
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### 技能
+- 角色的技能可和特定陣營的角色`連攜`，其特定陣營為該方法的返回值類型。
+  - 例如：split返回陣列，因此史普利特的技能可以和安瑞陣營的角色連攜。
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### 裝飾器
+- 裝備。
+
+### 參數
+- 輻射狀天賦樹，可以往葉節點或兄弟節點解鎖。
+- 有點數獲取上限，因此同角色也能配出不同玩法。
+
+### 捕獲
+- 可以低機率捕獲打倒的蟲子。
+- 湊圖鑑可以獲得微量屬性提升。
+
+## 隊伍編成
+
+- 3人隊伍，一人站場兩人待機。
+- 可透過技能連攜或換人指令，交換站場角色。
+
+## 戰鬥
+- 每回合獲得一定量記憶體，消耗記憶體可使指定角色發動技能。
+
+### 作用域
+- 場地效果。
