@@ -38,22 +38,18 @@ const Home: FC<Props> = () => {
           allyProgress={allyProgress}
           enemyProgress={enemyProgress}
         />
-        <div className='absolute right-5 bottom-5'>
-          {isUiHide || <Controller
+        {isUiHide || <div className='absolute top-1 flex justify-between px-5 w-full md:top-6 md:px-10'>
+          <Elegance />
+          <EnemyHp />
+          <Setting />
+        </div>}
+        {isUiHide || <div className='absolute bottom-5 flex justify-between items-end px-5 w-full md:px-10 md:bottom-10'>
+          <AllyHp />
+          <Controller
             onAttack={() => setAllyProgress(allyProgresses.closeAttack)}
             onChange={() => setEnemyProgress(enemyProgresses.closeAttack)}
-          />}
-        </div>
-        <div className='absolute left-5 bottom-5'>
-          {isUiHide || <AllyHp />}
-        </div>
-        <div className='absolute top-1 flex justify-between px-5 w-full'>
-          {isUiHide || <>
-            <Elegance />
-            <EnemyHp />
-            <Setting />
-          </>}
-        </div>
+          />
+        </div>}
       </div>
     </>
   )

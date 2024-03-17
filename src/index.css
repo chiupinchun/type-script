@@ -7,5 +7,5 @@
 }
 
 .btn.large {
-  @apply p-5;
+  @apply p-5 md:p-10 md:text-lg;
 }
