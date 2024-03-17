@@ -33,7 +33,7 @@ const Home: FC<Props> = () => {
 
   return (
     <>
-      <div className='reactive h-screen'>
+      <div className='reactive h-screen md:text-xl'>
         <BattleView
           allyProgress={allyProgress}
           enemyProgress={enemyProgress}

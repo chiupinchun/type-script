@@ -5,7 +5,13 @@
 .btn {
   @apply p-2 w-max border text-center hover:bg-slate-200 hover:bg-opacity-20;
 }
-
 .btn.large {
-  @apply p-5 md:p-10 md:text-lg;
+  @apply p-5 md:p-10;
+}
+
+.hp-bar {
+  @apply border rounded;
+}
+.hp-bar>div {
+  @apply bg-red-500 h-full rounded;
 }
