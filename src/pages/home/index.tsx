@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { ALLY_POSITION, ENEMY_POSITION } from '@/game/constants/battle'
 import { ModelProgress, useModelProgress } from '@/hooks/useModelProgress'
 import Controller from '@/components/battle/controller'
@@ -13,6 +13,12 @@ interface Props { }
 const Home: FC<Props> = () => {
   const [allyProgress, setAllyProgress] = useState<ModelProgress | null>(null)
   const [enemyProgress, setEnemyProgress] = useState<ModelProgress | null>(null)
+  const [isUiHide, setIsUiHide] = useState(false)
+
+  useEffect(() => {
+    const progressing = allyProgress !== null || enemyProgress !== null
+    setIsUiHide(progressing)
+  }, [allyProgress, enemyProgress])
 
   const allyProgresses = useModelProgress(
     () => setAllyProgress(progress => progress ? progress.next : null),
@@ -33,18 +39,20 @@ const Home: FC<Props> = () => {
           enemyProgress={enemyProgress}
         />
         <div className='absolute right-5 bottom-5'>
-          <Controller
+          {isUiHide || <Controller
             onAttack={() => setAllyProgress(allyProgresses.closeAttack)}
             onChange={() => setEnemyProgress(enemyProgresses.closeAttack)}
-          />
+          />}
         </div>
         <div className='absolute left-5 bottom-5'>
-          <AllyHp />
+          {isUiHide || <AllyHp />}
         </div>
         <div className='absolute top-1 flex justify-between px-5 w-full'>
-          <Elegance />
-          <EnemyHp />
-          <Setting />
+          {isUiHide || <>
+            <Elegance />
+            <EnemyHp />
+            <Setting />
+          </>}
         </div>
       </div>
     </>

@@ -11,8 +11,8 @@ const Controller: FC<Props> = ({
   return (
     <>
       <div className='flex flex-col gap-2'>
-        <button onClick={onAttack} className='btn'>我方攻擊</button>
-        <button onClick={onChange} className='btn'>敵方攻擊</button>
+        <button onClick={onAttack} className='btn large rounded'>攻擊</button>
+        <button onClick={onChange} className='btn large rounded'>換人</button>
       </div>
     </>
   )

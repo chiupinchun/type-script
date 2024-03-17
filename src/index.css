@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 .btn {
-  @apply p-2 w-max border text-center;
+  @apply p-2 w-max border text-center hover:bg-slate-200 hover:bg-opacity-20;
+}
+
+.btn.large {
+  @apply p-5;
 }
