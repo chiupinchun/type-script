@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
 import user from './user'
-import keyboard from './keyboard'
 import {
   useDispatch as _useDispatch,
   useSelector as _useSelector
@@ -8,7 +7,7 @@ import {
 
 export const store = configureStore({
   reducer: {
-    user, keyboard
+    user
   },
 })
 

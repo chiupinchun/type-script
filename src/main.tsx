@@ -1,15 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import App from './app/App.tsx'
+import '@/assets/css/global.css'
 
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import { routes } from './routes';
+import { routes } from './app/routes.tsx';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { store } from './app/common/store/index.ts';
 
 const router = createBrowserRouter(routes);
 

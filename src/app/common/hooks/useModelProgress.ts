@@ -1,4 +1,4 @@
-import { BASE_ATTACK_SPEED, BATTLE_FIELD_POSITION, MOVE_SPEED, RAW_CAMERA_POSITION } from "@/game/constants/battle"
+import { BASE_ATTACK_SPEED, BATTLE_FIELD_POSITION, MOVE_SPEED, RAW_CAMERA_POSITION } from "@game/constants/battle"
 import { modelActions } from "@/types/model"
 import { RootState } from "@react-three/fiber"
 import { Mesh, Vector3 } from "three"

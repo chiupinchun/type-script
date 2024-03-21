@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useState } from 'react'
-import { ALLY_POSITION, ENEMY_POSITION } from '@/game/constants/battle'
-import { ModelProgress, useModelProgress } from '@/hooks/useModelProgress'
-import Controller from '@/components/battle/controller'
-import AllyHp from '@/components/battle/allyHp'
-import BattleView from '@/components/battle/view'
-import Elegance from '@/components/battle/elegance'
-import EnemyHp from '@/components/battle/enemyHp'
-import Setting from '@/components/battle/setting'
+import { ALLY_POSITION, ENEMY_POSITION } from '@game/constants/battle'
+import { ModelProgress, useModelProgress } from '@app/common/hooks/useModelProgress'
+import Controller from './components/controller'
+import AllyHp from './components/allyHp'
+import BattleView from './components/view'
+import Elegance from './components/elegance'
+import EnemyHp from './components/enemyHp'
+import Setting from './components/setting'
 
 interface Props { }
 

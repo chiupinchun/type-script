@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
-import Movable from '../models/character'
-import { ALLY_POSITION, BATTLE_FIELD_POSITION, BATTLE_FIELD_RANGE, ENEMY_POSITION, RAW_CAMERA_POSITION } from '@/game/constants/battle'
+import { ALLY_POSITION, BATTLE_FIELD_POSITION, BATTLE_FIELD_RANGE, ENEMY_POSITION, RAW_CAMERA_POSITION } from '@game/constants/battle'
 import { Canvas } from '@react-three/fiber'
-import Field from '../models/field'
-import Grass from '../models/field-items/grass'
-import { ModelProgress } from '@/hooks/useModelProgress'
+import { ModelProgress } from '@app/common/hooks/useModelProgress'
+import Movable from '@app/common/components/models/character'
+import Field from '@app/common/components/models/field'
+import Grass from '@app/common/components/models/field-items/grass'
 
 interface Props {
   allyProgress: ModelProgress | null

@@ -2,10 +2,10 @@ import React, { FC } from 'react'
 
 interface Props { }
 
-const Battle: FC<Props> = () => {
+const Page: FC<Props> = () => {
   return (
-    <>battle</>
+    <>home</>
   )
 }
 
-export default Battle
+export default Page

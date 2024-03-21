@@ -1,6 +1,6 @@
 import { RouteObject } from "react-router-dom";
-import Home from "@/pages/home";
-import Battle from "@/pages/battle";
+import Home from "@app/home";
+import Battle from "@app/battle";
 
 export const routes: RouteObject[] = [
   {
