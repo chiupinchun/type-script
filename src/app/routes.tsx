@@ -4,7 +4,11 @@ import Battle from "@app/battle";
 
 export const routes: RouteObject[] = [
   {
-    path: "/",
+    path: '/',
+    Component: Battle
+  },
+  {
+    path: "/home",
     Component: Home
   },
   {
