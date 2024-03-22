@@ -1,10 +1,11 @@
-import { Character } from "../character";
+import { Character } from "@/types/battle"
+import { AllyCharacter } from "../character"
 
-export class SliceStr extends Character {
+export class SliceStr extends AllyCharacter {
   constructor(
-    lv: number
+    ...args: ConstructorParameters<typeof AllyCharacter>
   ) {
-    super(lv)
+    super(...args)
     const rawHp = this.lv * 2
     const rawAtk = this.lv
     const rawDef = this.lv

@@ -7,6 +7,7 @@ import BattleView from './components/view'
 import Elegance from './components/elegance'
 import EnemyHp from './components/enemyHp'
 import Setting from './components/setting'
+import { SliceStr } from '@game/characters/string/slice'
 
 interface Props { }
 
@@ -14,6 +15,9 @@ const Home: FC<Props> = () => {
   const [allyProgress, setAllyProgress] = useState<ModelProgress | null>(null)
   const [enemyProgress, setEnemyProgress] = useState<ModelProgress | null>(null)
   const [isUiHide, setIsUiHide] = useState(false)
+
+  const sliceStr = new SliceStr(10, null, [], [])
+  console.log(sliceStr)
 
   useEffect(() => {
     const progressing = allyProgress !== null || enemyProgress !== null

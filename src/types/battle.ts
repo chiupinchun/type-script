@@ -1,5 +1,4 @@
 import { getRandByRate } from "@/utils/random"
-import { Bug } from "@game/bugs/bug"
 
 export type DmgCtx = {
   target: Character,
@@ -31,10 +30,6 @@ export abstract class Character {
       dmg: value
     }
     this.onBeforeDmg && this.onBeforeDmg(dmgCtx)
-
-    if (target instanceof Bug) {
-      target.shieldRecieveDmg(value * (1 + this.breakShieldRate / 100))
-    }
 
     target.recieveDmg(value)
     this.onDmged && this.onDmged(dmgCtx)
