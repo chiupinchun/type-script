@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { ALLY_POSITION, BATTLE_FIELD_POSITION, BATTLE_FIELD_RANGE, ENEMY_POSITION, RAW_CAMERA_POSITION } from '@game/constants/battle'
+import { ALLY_POSITION, BATTLE_FIELD_POSITION, BATTLE_FIELD_RANGE, ENEMY_POSITION, RAW_CAMERA_POSITION } from '@game/constants/battle-ui'
 import { Canvas } from '@react-three/fiber'
 import { ModelProgress } from '@app/common/hooks/useModelProgress'
 import Movable from '@app/common/components/models/character'
