@@ -1,27 +1,16 @@
-export type DmgCtx = {
-  target?: Character, isCritical?: boolean, dmg?: number
-}
-type DmgLifeCycle = (ctx: DmgCtx) => void
+import { Character } from "@/types/battle"
+import { Bug } from "@game/bugs/bug"
 
-export abstract class Character {
-  // basic
-  hp: number = 0
-  maxHp: number = 0
-  def: number = 0
-  atk: number = 0
-
-  // critical relation
-  critical = 0
-  criDmg = 0
-
-  // others
-  lastAtkBy: Character | null = null
-  protected onBeforeDmg: DmgLifeCycle | null = null
-  protected onDmged: DmgLifeCycle | null = null
+export abstract class AllyCharacter extends Character {
 
   constructor(
-    public lv: number
-  ) { }
+    public readonly lv: number,
+    public readonly catching: Bug,
+    public readonly decorators: never[],
+    public readonly parameters: never[]
+  ) {
+    super()
+  }
 
   protected initState(rawHp: number, rawAtk: number, rawDef: number) {
     // TODO: weapons or talents may provide some state.
@@ -31,12 +20,4 @@ export abstract class Character {
   }
 
   abstract skill(target: Character): void
-
-  dealDmg(target: Character, value: number) {
-
-  }
-
-  recieveDmg(value: number) {
-
-  }
 }

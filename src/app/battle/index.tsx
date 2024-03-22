@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { ALLY_POSITION, ENEMY_POSITION } from '@game/constants/battle'
+import { ALLY_POSITION, ENEMY_POSITION } from '@game/constants/battle-ui'
 import { ModelProgress, useModelProgress } from '@app/common/hooks/useModelProgress'
 import Controller from './components/controller'
 import AllyHp from './components/allyHp'
