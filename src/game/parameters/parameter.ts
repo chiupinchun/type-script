@@ -1,4 +1,4 @@
-import { Affix } from "@/types/affix"
+import { Affix } from "@game/affix"
 import { Character } from "@/types/battle"
 
 interface ParameterCore {

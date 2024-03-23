@@ -1,16 +1,8 @@
-import { Affix } from "@/types/affix"
+import { Affix, collectAffix, setAffix } from "@game/affix"
 import { Character } from "@/types/battle"
 import { Bug } from "@game/bugs/bug"
 import { Decorator, enableDecoratorSet } from "@game/decorators/decorator"
 import { Parameter } from "@game/parameters/parameter"
-
-const setAffix = (affixes: Affix[], affix: Affix) => {
-  if (affix.type === 'add') {
-    affixes.unshift(affix)
-  } else {
-    affixes.push(affix)
-  }
-}
 
 export abstract class AllyCharacter extends Character {
 
@@ -34,26 +26,20 @@ export abstract class AllyCharacter extends Character {
       this,
       decorator => {
         decorator.affixes.forEach(affix => {
-          setAffix(affixes, affix)
+          collectAffix(affixes, affix)
         })
       }
     )
 
     this.parameters.forEach(parameter => {
       if (parameter.type === 'affix') {
-        setAffix(affixes, parameter.affix)
+        collectAffix(affixes, parameter.affix)
       } else {
         parameter.effect(this)
       }
     })
 
-    affixes.forEach(affix => {
-      if (affix.type === 'add') {
-        this[affix.attr] += affix.value
-      } else {
-        this[affix.attr] *= (1 + affix.value / 100)
-      }
-    })
+    affixes.forEach(affix => setAffix(this, affix))
   }
 
   abstract skill(target: Character): void
