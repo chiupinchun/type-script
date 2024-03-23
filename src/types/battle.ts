@@ -21,6 +21,7 @@ export abstract class Character {
 
   // others
   breakShieldRate = 0
+
   protected onBeforeDmg: DmgLifeCycle | null = null
   protected onDmged: DmgLifeCycle | null = null
 

@@ -10,7 +10,7 @@ export class SliceStr extends StringCharacter {
     const rawAtk = this.lv
     const rawDef = this.lv
 
-    this.initState(rawHp, rawAtk, rawDef)
+    this.initStatus(rawHp, rawAtk, rawDef)
   }
 
   skill(target: Character) {

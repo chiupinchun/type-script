@@ -15,7 +15,7 @@ export abstract class AllyCharacter extends Character {
     super()
   }
 
-  protected initState(rawHp: number, rawAtk: number, rawDef: number) {
+  protected initStatus(rawHp: number, rawAtk: number, rawDef: number) {
     this.hp = this.maxHp = rawHp
     this.atk = rawAtk
     this.def = rawDef
