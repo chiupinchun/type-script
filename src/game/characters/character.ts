@@ -1,7 +1,16 @@
 import { Affix } from "@/types/affix"
 import { Character } from "@/types/battle"
 import { Bug } from "@game/bugs/bug"
-import { Decorator } from "@game/decorators/decorator"
+import { Decorator, enableDecoratorSet } from "@game/decorators/decorator"
+import { Parameter } from "@game/parameters/parameter"
+
+const setAffix = (affixes: Affix[], affix: Affix) => {
+  if (affix.type === 'add') {
+    affixes.unshift(affix)
+  } else {
+    affixes.push(affix)
+  }
+}
 
 export abstract class AllyCharacter extends Character {
 
@@ -9,41 +18,32 @@ export abstract class AllyCharacter extends Character {
     public readonly lv: number,
     public readonly catching: Bug | null,
     public readonly decorators: Decorator[],
-    public readonly parameters: never[]
+    public readonly parameters: Parameter[]
   ) {
     super()
   }
 
   protected initState(rawHp: number, rawAtk: number, rawDef: number) {
-    // TODO: weapons or talents may provide some state.
     this.hp = this.maxHp = rawHp
     this.atk = rawAtk
     this.def = rawDef
 
     const affixes: Affix[] = []
 
-    const decoratorMap: Record<string, Decorator[]> = {}
-    this.decorators.forEach(decorator => {
-      if (decoratorMap[decorator.name]) {
-        decoratorMap[decorator.name].push(decorator)
-      } else {
-        decoratorMap[decorator.name] = [decorator]
+    enableDecoratorSet(
+      this,
+      decorator => {
+        decorator.affixes.forEach(affix => {
+          setAffix(affixes, affix)
+        })
       }
+    )
 
-      decorator.affixes.forEach(affix => {
-        if (affix.type === 'add') {
-          affixes.unshift(affix)
-        } else {
-          affixes.push(affix)
-        }
-      })
-    })
-    Object.values(decoratorMap).forEach(decorators => {
-      if (decorators.length > 2) {
-        decorators[0].on2set(this)
-        if (decorators.length > 3) {
-          decorators[0].on3set(this)
-        }
+    this.parameters.forEach(parameter => {
+      if (parameter.type === 'affix') {
+        setAffix(affixes, parameter.affix)
+      } else {
+        parameter.effect(this)
       }
     })
 
