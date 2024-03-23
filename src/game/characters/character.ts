@@ -43,6 +43,7 @@ export abstract class AllyCharacter extends Character {
   }
 
   abstract skill(target: Character): void
+  abstract skillChain: typeof AllyCharacter
 
   dealDmg(target: Character, value: number): void {
     if (target instanceof Bug) {

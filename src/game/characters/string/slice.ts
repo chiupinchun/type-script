@@ -1,9 +1,9 @@
 import { Character } from "@/types/battle"
-import { AllyCharacter } from "../character"
+import { StringCharacter } from "."
 
-export class SliceStr extends AllyCharacter {
+export class SliceStr extends StringCharacter {
   constructor(
-    ...args: ConstructorParameters<typeof AllyCharacter>
+    ...args: ConstructorParameters<typeof StringCharacter>
   ) {
     super(...args)
     const rawHp = this.lv * 2
@@ -19,4 +19,6 @@ export class SliceStr extends AllyCharacter {
     this.dealDmg(target, 100)
     target.def = rawDef
   }
+
+  skillChain = StringCharacter
 }
