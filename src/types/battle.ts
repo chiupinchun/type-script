@@ -21,7 +21,7 @@ export abstract class Character {
   criDmg = 0
 
   // state relation
-  states: State[] = []
+  states: Set<State> = new Set()
   stateImposeRate = 0
   stateRisistRate = 0
   setState<S extends State>(
@@ -33,15 +33,22 @@ export abstract class Character {
     const isSuccess = getRandByRate(totalRate)
 
     if (isSuccess) {
-      target.states.push(new state())
+      target.states.add(new state())
     }
   }
 
   // others
   breakShieldRate = 0
 
-  protected onBeforeDmg: DmgLifeCycle | null = null
-  protected onDmged: DmgLifeCycle | null = null
+  // real time status
+
+
+  // lifecycles
+  onBeforeDmgs: DmgLifeCycle[] = []
+  onDmgeds: DmgLifeCycle[] = []
+  onBeforeRecieveDmgs: DmgLifeCycle[] = []
+  onRecievedDmgs: DmgLifeCycle[] = []
+  onCalcStatuses: (() => void)[] = []
 
   enableAffixes(affixes: Affix[]) {
     affixes.forEach(affix => setAffix(this, affix))
@@ -49,33 +56,37 @@ export abstract class Character {
 
   dealDmg(target: Character, value: number) {
     const isCritical = getRandByRate(this.critical)
-    const dmg = value * (isCritical ? (1 + this.criDmg / 100) : 1)
+    const dmg = Math.round(
+      value * (isCritical ? (1 + this.criDmg / 100) : 1)
+    )
     const dmgCtx = {
       target, isCritical, dmg
     }
-    this.onBeforeDmg && this.onBeforeDmg(dmgCtx)
+    this.onBeforeDmgs.forEach(fn => fn(dmgCtx))
 
-    target.recieveDmg(dmg)
-    this.onDmged && this.onDmged(dmgCtx)
+    target.recieveDmg(dmgCtx)
+    this.onDmgeds.forEach(fn => fn(dmgCtx))
   }
 
-  recieveDmg(value: number) {
-    this.hp = Math.max(this.hp - value, 0)
+  recieveDmg(ctx: DmgCtx) {
+    this.onBeforeRecieveDmgs.forEach(fn => fn(ctx))
+    this.hp = Math.max(this.hp - ctx.dmg, 0)
+    this.onRecievedDmgs.forEach(fn => fn(ctx))
   }
 
   onTurnEnd() {
     this.handleStates()
   }
 
-  handleStates(isTurnReduce = true) {
-    const statesAfterTurn: State[] = []
+  handleStates(needReduce = true) {
     this.states.forEach(state => {
       state.effect(this)
-      isTurnReduce && state.effectTurn--
-      if (state.effectTurn > 0) {
-        statesAfterTurn.push(state)
+      if (needReduce) {
+        state.stock > 1 ? state.stock-- : state.effectTurn--
+      }
+      if (state.effectTurn <= 0) {
+        this.states.delete(state)
       }
     })
-    this.states = statesAfterTurn
   }
 }

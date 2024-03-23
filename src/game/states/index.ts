@@ -10,6 +10,7 @@ export abstract class State {
   abstract description: string
   abstract type: StateType
   abstract effect: (character: Character) => void
+  stock = 1
   abstract maxEffectTurn: number
   abstract effectTurn: number
 }
