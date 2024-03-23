@@ -1,8 +1,10 @@
 import { Character } from "@/types/battle"
 
-export type AffixAttr = 'maxHp' | 'atk' | 'def' | 'critical' | 'criDmg' | 'breakShieldRate'
+export type AffixAttr = 'maxHp' | 'atk' | 'def' | 'critical' | 'criDmg' | 'stateImposeRate' | 'stateRisistRate' | 'breakShieldRate'
 export type AffixType = 'add' | 'percent'
 
+// TODO: it's not only used in affix, but status changes in battle.
+// maybe it should be renamed as StatusPipe.
 export interface Affix {
   attr: AffixAttr
   type: AffixType
@@ -17,10 +19,14 @@ export const collectAffix = (affixes: Affix[], affix: Affix) => {
   }
 }
 
-export const setAffix = (character: Character, affix: Affix) => {
+export const calcAffix = (rawValue: number, affix: Affix) => {
   if (affix.type === 'add') {
-    character[affix.attr] += affix.value
+    return rawValue + affix.value
   } else {
-    character[affix.attr] *= (1 + affix.value / 100)
+    return rawValue * (1 + affix.value / 100)
   }
+}
+
+export const setAffix = (character: Character, affix: Affix) => {
+  character[affix.attr] = calcAffix(character[affix.attr], affix)
 }
