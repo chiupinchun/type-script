@@ -1,5 +1,6 @@
 import { getRandByRate } from "@/utils/random"
 import { Affix, setAffix } from "@game/affix"
+import { State } from "@game/states"
 
 export type DmgCtx = {
   target: Character,
@@ -18,6 +19,23 @@ export abstract class Character {
   // critical relation
   critical = 0
   criDmg = 0
+
+  // state relation
+  states: State[] = []
+  stateImposeRate = 0
+  stateRisistRate = 0
+  setState<S extends State>(
+    target: Character,
+    state: new () => S,
+    baseRate: number
+  ) {
+    const totalRate = (baseRate + this.stateImposeRate - target.stateRisistRate) / 100
+    const isSuccess = getRandByRate(totalRate)
+
+    if (isSuccess) {
+      target.states.push(new state())
+    }
+  }
 
   // others
   breakShieldRate = 0
@@ -46,6 +64,18 @@ export abstract class Character {
   }
 
   onTurnEnd() {
+    this.handleStates()
+  }
 
+  handleStates(isTurnReduce = true) {
+    const statesAfterTurn: State[] = []
+    this.states.forEach(state => {
+      state.effect(this)
+      isTurnReduce && state.effectTurn--
+      if (state.effectTurn > 0) {
+        statesAfterTurn.push(state)
+      }
+    })
+    this.states = statesAfterTurn
   }
 }
