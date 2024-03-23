@@ -1,4 +1,5 @@
 import { getRandByRate } from "@/utils/random"
+import { Affix, setAffix } from "@game/affix"
 
 export type DmgCtx = {
   target: Character,
@@ -22,6 +23,10 @@ export abstract class Character {
   breakShieldRate = 0
   protected onBeforeDmg: DmgLifeCycle | null = null
   protected onDmged: DmgLifeCycle | null = null
+
+  enableAffixes(affixes: Affix[]) {
+    affixes.forEach(affix => setAffix(this, affix))
+  }
 
   dealDmg(target: Character, value: number) {
     const isCritical = getRandByRate(this.critical)

@@ -1,4 +1,4 @@
-import { Affix, collectAffix, setAffix } from "@game/affix"
+import { Affix, collectAffix } from "@game/affix"
 import { Character } from "@/types/battle"
 import { Bug } from "@game/bugs/bug"
 import { Decorator, enableDecoratorSet } from "@game/decorators/decorator"
@@ -39,7 +39,7 @@ export abstract class AllyCharacter extends Character {
       }
     })
 
-    affixes.forEach(affix => setAffix(this, affix))
+    this.enableAffixes(affixes)
   }
 
   abstract skill(target: Character): void

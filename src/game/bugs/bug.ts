@@ -1,10 +1,21 @@
 import { Character } from "@/types/battle"
+import { Affix } from "@game/affix"
 import { DMG_RATE_ON_SHIELD, SHIELD_RECOVER_TURN } from "@game/constants/battle-core"
 
 export abstract class Bug extends Character {
   abstract maxShield: number
   abstract shield: number
   recoverShieldTurn?: number
+
+  constructor(
+    affixes?: Affix[]
+  ) {
+    super()
+
+    if (affixes?.length) {
+      this.enableAffixes(affixes)
+    }
+  }
 
   shieldRecieveDmg(value: number) {
     if (this.shield <= value) {
