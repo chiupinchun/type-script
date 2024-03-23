@@ -1,8 +1,8 @@
 import { Affix, collectAffix } from "@game/affix"
 import { Character } from "@/types/battle"
 import { Bug } from "@game/bugs/bug"
-import { Decorator, enableDecoratorSet } from "@game/decorators/decorator"
-import { Parameter } from "@game/parameters/parameter"
+import { Decorator, enableDecoratorSet } from "@game/decorators"
+import { Parameter } from "@game/parameters"
 
 export abstract class AllyCharacter extends Character {
 
