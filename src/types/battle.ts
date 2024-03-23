@@ -49,13 +49,13 @@ export abstract class Character {
 
   dealDmg(target: Character, value: number) {
     const isCritical = getRandByRate(this.critical)
+    const dmg = value * (isCritical ? (1 + this.criDmg / 100) : 1)
     const dmgCtx = {
-      target, isCritical,
-      dmg: value
+      target, isCritical, dmg
     }
     this.onBeforeDmg && this.onBeforeDmg(dmgCtx)
 
-    target.recieveDmg(value)
+    target.recieveDmg(dmg)
     this.onDmged && this.onDmged(dmgCtx)
   }
 
