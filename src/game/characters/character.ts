@@ -31,11 +31,15 @@ export abstract class AllyCharacter extends Character {
       }
     )
 
-    this.parameters.forEach(parameter => {
-      if (parameter.type === 'affix') {
-        collectAffix(affixes, parameter.affix)
-      } else {
-        parameter.effect(this)
+    this.parameters.forEach(parameterNode => {
+      let current: Parameter | null = parameterNode
+      while (current) {
+        if (parameterNode.type === 'affix') {
+          collectAffix(affixes, parameterNode.affix)
+        } else {
+          parameterNode.effect(this)
+        }
+        current = parameterNode.prev
       }
     })
 

@@ -2,7 +2,8 @@ import { Affix } from "@game/affix"
 import { Character } from "@/types/battle"
 
 interface ParameterCore {
-  active: boolean
+  prev: Parameter | null
+  next: Parameter | null
 }
 
 interface EffectParameter extends ParameterCore {
