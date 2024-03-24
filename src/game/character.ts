@@ -5,7 +5,11 @@ import { DmgCtx, DmgLifeCycle } from "@/types/battle"
 
 const calcStatus = (rawValue: number, attr: AffixAttr, pipes: Set<StatusPipe>) => {
   pipes.forEach(pipe => {
-    if (pipe.attr === attr) { rawValue = calcAffix(rawValue, pipe) }
+    if (pipe.attr === attr) {
+      for (let i = 0; i < pipe.stock; i++) {
+        rawValue = calcAffix(rawValue, pipe)
+      }
+    }
   })
   return Math.round(rawValue)
 }
