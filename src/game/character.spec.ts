@@ -7,14 +7,14 @@ describe('character', () => {
   class TestCharacter extends Character {
     hp = 50
     maxHp = 50
-    protected _atk: number = 50
-    protected _def: number = 50
-    protected _critical: number = 50
-    protected _criDmg: number = 50
-    protected _totalDmg: number = 50
-    protected _breakShieldRate: number = 50
-    protected _stateImposeRate: number = 50
-    protected _stateRisistRate: number = 50
+    _atk: number = 50
+    _def: number = 50
+    _critical: number = 50
+    _criDmg: number = 50
+    _totalDmg: number = 50
+    _breakShieldRate: number = 50
+    _stateImposeRate: number = 50
+    _stateRisistRate: number = 50
   }
 
   let character: TestCharacter

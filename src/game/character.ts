@@ -18,56 +18,56 @@ export abstract class Character {
   // basic
   hp: number = 0
   maxHp: number = 0
-  protected _atk: number = 0
+  _atk: number = 0
   get atk() {
     return calcStatus(this._atk, 'atk', this.statusPipes)
   }
   set atk(value: number) {
     this._atk = Math.round(value)
   }
-  protected _def: number = 0
+  _def: number = 0
   get def() {
     return calcStatus(this._def, 'def', this.statusPipes)
   }
   set def(value: number) {
     this._def = Math.round(value)
   }
-  protected _critical = 0
+  _critical = 0
   get critical() {
     return calcStatus(this._critical, 'critical', this.statusPipes)
   }
   set critical(value: number) {
     this._critical = Math.round(value)
   }
-  protected _criDmg = 0
+  _criDmg = 0
   get criDmg() {
     return calcStatus(this._criDmg, 'criDmg', this.statusPipes)
   }
   set criDmg(value: number) {
     this._criDmg = Math.round(value)
   }
-  protected _totalDmg = 0
+  _totalDmg = 0
   get totalDmg() {
     return calcStatus(this._totalDmg, 'totalDmg', this.statusPipes)
   }
   set totalDmg(value: number) {
     this._totalDmg = Math.round(value)
   }
-  protected _stateImposeRate = 0
+  _stateImposeRate = 0
   get stateImposeRate() {
     return calcStatus(this._stateImposeRate, 'stateImposeRate', this.statusPipes)
   }
   set stateImposeRate(value: number) {
     this._stateImposeRate = Math.round(value)
   }
-  protected _stateRisistRate = 0
+  _stateRisistRate = 0
   get stateRisistRate() {
     return calcStatus(this._stateRisistRate, 'stateRisistRate', this.statusPipes)
   }
   set stateRisistRate(value: number) {
     this._stateRisistRate = Math.round(value)
   }
-  protected _breakShieldRate = 0
+  _breakShieldRate = 0
   get breakShieldRate() {
     return calcStatus(this._breakShieldRate, 'breakShieldRate', this.statusPipes)
   }

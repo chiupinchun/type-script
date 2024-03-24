@@ -14,8 +14,8 @@ export class SliceStr extends StringCharacter {
   }
 
   skill(target: Character) {
-    const rawDef = target.def
-    target.def = target.def * 0.8
+    const rawDef = target._def
+    target.def = target._def * 0.8
     this.dealDmg(target, 100)
     target.def = rawDef
   }
