@@ -16,8 +16,8 @@ const angerParam = new EffectParameter(character => {
 const hardFightParam = new EffectParameter(character => {
   character.onTurnStarts.push((self) => {
     const atkUp = new StatusPipe('atk', 'percent', 50, 1)
-    const criDmgUp = new StatusPipe('criDmg', 'percent', 50, 1)
-    const totalDmgUp = new StatusPipe('criDmg', 'percent', 50, 1)
+    const criDmgUp = new StatusPipe('criDmg', 'add', 50, 1)
+    const totalDmgUp = new StatusPipe('totalDmg', 'add', 50, 1)
 
     if (self.hp <= self.maxHp / 2) {
       self.statusPipes.add(atkUp)
