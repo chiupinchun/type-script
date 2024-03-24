@@ -1,3 +1,4 @@
+import { SMALL_ADD_AFFIX, SMALL_PERCENT_AFFIX } from "@game/constants/affix";
 import { AffixParameter, EffectParameter, link } from ".";
 import { StatusPipe } from "@game/status";
 
@@ -31,9 +32,9 @@ const hardFightParam = new EffectParameter(character => {
 })
 
 export const fighterRoute = link(
-  new AffixParameter({ attr: 'atk', type: 'add', value: 5 }),
-  new AffixParameter({ attr: 'def', type: 'add', value: 5 }),
+  new AffixParameter({ attr: 'atk', type: 'add', value: SMALL_ADD_AFFIX }),
+  new AffixParameter({ attr: 'def', type: 'add', value: SMALL_ADD_AFFIX }),
   angerParam,
-  new AffixParameter({ attr: 'atk', type: 'percent', value: 5 }),
+  new AffixParameter({ attr: 'atk', type: 'percent', value: SMALL_PERCENT_AFFIX }),
   hardFightParam
 )
