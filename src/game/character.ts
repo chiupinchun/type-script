@@ -130,6 +130,7 @@ export abstract class Character {
   handleTurnEnd() {
     this.onTurnEnds.forEach(fn => fn(this))
     this.handleStatesTurn()
+    this.handleStatusPipeTurn()
   }
 
   handleStatesTurn(needReduce = true) {
