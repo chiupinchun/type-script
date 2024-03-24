@@ -11,4 +11,11 @@ export default defineConfig({
       '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,playwright,tsup,build}.config.*'
     ]
   },
+  resolve: {
+    alias: {
+      '@app': '/src/app/',
+      '@game': '/src/game/',
+      '@': '/src/'
+    }
+  }
 })
