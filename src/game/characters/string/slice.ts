@@ -1,4 +1,4 @@
-import { Character } from "@/types/battle"
+import { Character } from "@game/character"
 import { StringCharacter } from "."
 
 export class SliceStr extends StringCharacter {

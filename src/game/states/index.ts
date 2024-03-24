@@ -1,4 +1,5 @@
-import { Character, ReduceOnTurnEnd } from "@/types/battle"
+import { ReduceOnTurnEnd } from "@/types/battle"
+import { Character } from "@game/character"
 
 export enum StateType {
   debuff,

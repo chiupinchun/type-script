@@ -1,6 +1,6 @@
 import { Affix } from "@game/status";
-import { Character } from "@/types/battle";
-import { AllyCharacter } from "@game/characters/character";
+import { AllyCharacter } from "@game/characters/ally";
+import { Character } from "@game/character";
 
 export abstract class Decorator {
   abstract name: string

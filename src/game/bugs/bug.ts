@@ -1,6 +1,7 @@
-import { Character } from "@/types/battle"
 import { Affix } from "@game/status"
 import { DMG_RATE_ON_SHIELD, SHIELD_RECOVER_TURN } from "@game/constants/battle-core"
+import { Character } from "@game/character"
+import { DmgCtx } from "@/types/battle"
 
 export abstract class Bug extends Character {
   abstract maxShield: number
@@ -29,11 +30,15 @@ export abstract class Bug extends Character {
     this.recoverShieldTurn = SHIELD_RECOVER_TURN
   }
 
-  recieveDmg(value: number): void {
-    super.recieveDmg(this.shield > 0 ? value * DMG_RATE_ON_SHIELD : value)
+  recieveDmg(ctx: DmgCtx): void {
+    const ctxAfterShiled = {
+      ...ctx,
+      dmg: this.shield > 0 ? ctx.dmg * DMG_RATE_ON_SHIELD : ctx.dmg
+    }
+    super.recieveDmg(ctxAfterShiled)
   }
 
-  onTurnEnd(): void {
+  handleTurnEnd(): void {
     if (this.recoverShieldTurn) {
       this.recoverShieldTurn -= 1
     }
@@ -41,6 +46,6 @@ export abstract class Bug extends Character {
       this.shield = this.maxShield
       this.recoverShieldTurn = undefined
     }
-    super.onTurnEnd()
+    super.handleTurnEnd()
   }
 }

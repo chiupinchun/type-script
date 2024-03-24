@@ -1,4 +1,5 @@
-import { Character, ReduceOnTurnEnd } from "@/types/battle"
+import { ReduceOnTurnEnd } from "@/types/battle"
+import { Character } from "./character"
 
 export type AffixAttr = 'maxHp' | 'atk' | 'def' | 'critical' | 'criDmg' | 'totalDmg' | 'stateImposeRate' | 'stateRisistRate' | 'breakShieldRate'
 export type AffixType = 'add' | 'percent'

@@ -1,5 +1,5 @@
+import { Character } from "@game/character"
 import { Affix } from "@game/status"
-import { Character } from "@/types/battle"
 
 interface IParameterCore {
   prev: Parameter | null
