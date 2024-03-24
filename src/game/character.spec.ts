@@ -1,5 +1,7 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest'
 import { Character } from './character'
+import { State, StateType } from './states'
+import { StatusPipe } from './status'
 
 describe('character', () => {
   class TestCharacter extends Character {
@@ -78,6 +80,61 @@ describe('character', () => {
       character.onTurnEnds.push(onTurnEnd)
       character.handleTurnEnd()
       expect(onTurnEnd).toBeCalled()
+    })
+
+    describe('state & statusPipe', () => {
+      class TestState extends State {
+        name = '測試'
+        description: string = ''
+        type = StateType.buff
+        effect: (character: Character) => void = () => { }
+        maxEffectTurn = 2
+        effectTurn = 2
+
+        constructor(public stock = 1) {
+          super()
+        }
+      }
+
+      test('should reduce effectTurn when turn end', () => {
+        const testState = new TestState()
+        character.states.add(testState)
+        const atkPipe = new StatusPipe('atk', 'add', 1, 2)
+        character.statusPipes.add(atkPipe)
+
+        character.handleTurnEnd()
+
+        expect(testState.effectTurn).toBe(1)
+        expect(character.states.size).toBe(1)
+        expect(atkPipe.effectTurn).toBe(1)
+        expect(character.statusPipes.size).toBe(1)
+      })
+
+      test('should lose state & pipe when turn to 0', () => {
+        const testState = new TestState()
+        character.states.add(testState)
+        const atkPipe = new StatusPipe('atk', 'add', 1, 2)
+        character.statusPipes.add(atkPipe)
+
+        character.handleTurnEnd()
+        character.handleTurnEnd()
+        expect(character.states.size).toBe(0)
+        expect(character.statusPipes.size).toBe(0)
+      })
+
+      test('should previously reduce stock if stock > 1', () => {
+        const testState = new TestState(2)
+        character.states.add(testState)
+        const atkPipe = new StatusPipe('atk', 'add', 1, 2, 2)
+        character.statusPipes.add(atkPipe)
+
+        character.handleTurnEnd()
+
+        expect(testState.stock).toBe(1)
+        expect(character.states.size).toBe(1)
+        expect(atkPipe.stock).toBe(1)
+        expect(character.statusPipes.size).toBe(1)
+      })
     })
   })
 })
