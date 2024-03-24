@@ -3,8 +3,8 @@ import { AffixParameter, EffectParameter, link } from ".";
 import { StatusPipe } from "@game/status";
 
 const angerParam = new EffectParameter(character => {
-  const atkUp = new StatusPipe('atk', 'percent', 3, 1)
-  const defUp = new StatusPipe('def', 'percent', 3, 1)
+  const atkUp = new StatusPipe('atk', 'percent', 3, 1, 2)
+  const defUp = new StatusPipe('def', 'percent', 3, 1, 2)
   character.onRecievedDmgs.push(() => {
     if (character.statusPipes.has(atkUp)) { atkUp.stock += 2 }
     else { character.statusPipes.add(atkUp) }
