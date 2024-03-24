@@ -1,13 +1,14 @@
-import { Strength } from "@game/states/buff";
 import { AffixParameter, EffectParameter, link } from ".";
 import { StatusPipe } from "@game/status";
 
 const angerParam = new EffectParameter(character => {
-  const strength = new Strength()
+  const atkUp = new StatusPipe('atk', 'percent', 3, 1)
+  const defUp = new StatusPipe('def', 'percent', 3, 1)
   character.onRecievedDmgs.push(() => {
-    const hasState = character.states.has(strength)
-    if (hasState) { strength.stock++ }
-    else { character.states.add(strength) }
+    if (character.statusPipes.has(atkUp)) { atkUp.stock += 2 }
+    else { character.statusPipes.add(atkUp) }
+    if (character.statusPipes.has(defUp)) { defUp.stock += 2 }
+    else { character.statusPipes.add(defUp) }
   })
 })
 
