@@ -37,7 +37,13 @@ export class AffixParameter implements IAffixParameter {
 export type Parameter = IEffectParameter | IAffixParameter
 
 export const link = (...parameterNodes: Parameter[]) => {
-  if (!parameterNodes.length) { return null }
+  if (!parameterNodes.length) {
+    return {
+      first: null,
+      last: null,
+      list: []
+    }
+  }
 
   let prevNode = parameterNodes[0]
   for (let i = 1; i < parameterNodes.length; i++) {
@@ -47,5 +53,9 @@ export const link = (...parameterNodes: Parameter[]) => {
     prevNode = currentNode
   }
 
-  return parameterNodes[0]
+  return {
+    first: parameterNodes[0],
+    last: parameterNodes[parameterNodes.length - 1],
+    list: parameterNodes
+  }
 }
