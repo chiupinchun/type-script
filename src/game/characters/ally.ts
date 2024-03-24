@@ -34,12 +34,12 @@ export abstract class AllyCharacter extends Character {
     this.parameters.forEach(parameterNode => {
       let current: Parameter | null = parameterNode
       while (current) {
-        if (parameterNode.type === 'affix') {
-          collectAffix(affixes, parameterNode.affix)
+        if (current.type === 'affix') {
+          collectAffix(affixes, current.affix)
         } else {
-          parameterNode.effect(this)
+          current.effect(this)
         }
-        current = parameterNode.prev
+        current = current.prev
       }
     })
 

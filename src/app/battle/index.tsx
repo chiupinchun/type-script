@@ -8,7 +8,11 @@ import Elegance from './components/elegance'
 import EnemyHp from './components/enemyHp'
 import Setting from './components/setting'
 import { SliceStr } from '@game/characters/string/slice'
+import { fighterRoute } from '@game/parameters/fighter'
 
+const parameter = fighterRoute.last
+const sliceStr = new SliceStr(10, null, [], [parameter])
+console.log(sliceStr)
 interface Props { }
 
 const Home: FC<Props> = () => {
@@ -16,8 +20,6 @@ const Home: FC<Props> = () => {
   const [enemyProgress, setEnemyProgress] = useState<ModelProgress | null>(null)
   const [isUiHide, setIsUiHide] = useState(false)
 
-  const sliceStr = new SliceStr(10, null, [], [])
-  console.log(sliceStr)
 
   useEffect(() => {
     const progressing = allyProgress !== null || enemyProgress !== null

@@ -38,11 +38,7 @@ export type Parameter = IEffectParameter | IAffixParameter
 
 export const link = (...parameterNodes: Parameter[]) => {
   if (!parameterNodes.length) {
-    return {
-      first: null,
-      last: null,
-      list: []
-    }
+    throw new Error('parameterNodes should be array with at least 1 term.')
   }
 
   let prevNode = parameterNodes[0]
