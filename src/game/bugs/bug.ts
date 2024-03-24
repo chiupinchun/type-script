@@ -30,12 +30,28 @@ export abstract class Bug extends Character {
     this.recoverShieldTurn = SHIELD_RECOVER_TURN
   }
 
+  recoverShield() {
+    this.shield = this.maxShield
+  }
+
   recieveDmg(ctx: DmgCtx): void {
     const ctxAfterShiled = {
       ...ctx,
       dmg: this.shield > 0 ? ctx.dmg * DMG_RATE_ON_SHIELD : ctx.dmg
     }
     super.recieveDmg(ctxAfterShiled)
+  }
+
+  handleTurnStart(): void {
+    if (this.recoverShieldTurn) {
+      if (this.recoverShieldTurn > 0) {
+        this.recoverShieldTurn--
+      } else {
+        this.recoverShield()
+      }
+    }
+
+    super.handleTurnStart()
   }
 
   handleTurnEnd(): void {

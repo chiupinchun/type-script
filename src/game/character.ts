@@ -90,11 +90,12 @@ export abstract class Character {
   statusPipes: Set<StatusPipe> = new Set()
 
   // lifecycles
-  onTurnStarts: ((self: Character, opponent: Character) => void)[] = []
+  onTurnStarts: ((self: Character) => void)[] = []
   onBeforeDmgs: DmgLifeCycle[] = []
   onDmgeds: DmgLifeCycle[] = []
   onBeforeRecieveDmgs: DmgLifeCycle[] = []
   onRecievedDmgs: DmgLifeCycle[] = []
+  onTurnEnds: ((self: Character) => void)[] = []
 
   enableAffixes(affixes: Affix[]) {
     affixes.forEach(affix => setAffix(this, affix))
@@ -122,7 +123,12 @@ export abstract class Character {
     this.onRecievedDmgs.forEach(fn => fn(ctx))
   }
 
+  handleTurnStart() {
+    this.onTurnStarts.forEach(fn => fn(this))
+  }
+
   handleTurnEnd() {
+    this.onTurnEnds.forEach(fn => fn(this))
     this.handleStatesTurn()
   }
 
