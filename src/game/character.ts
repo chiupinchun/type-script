@@ -103,7 +103,9 @@ export abstract class Character {
   dealDmg(target: Character, value: number) {
     const isCritical = getRandByRate(this.critical)
     const dmg = Math.round(
-      value * (isCritical ? (1 + this.criDmg / 100) : 1)
+      value
+      * (this.atk / target.def)
+      * (isCritical ? (1 + this.criDmg / 100) : 1)
     )
     const dmgCtx = {
       target, isCritical, dmg

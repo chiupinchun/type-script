@@ -51,8 +51,8 @@ export abstract class Bug extends Character {
 }
 
 export class TestBug extends Bug {
-  hp = 100
-  maxHp = 100
+  hp = 9999999
+  maxHp = 9999999
   _atk = 10
   _def = 10
   maxShield: number = 10
