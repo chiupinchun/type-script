@@ -15,7 +15,7 @@ export class SliceStr extends StringCharacter {
 
   skill(target: Character) {
     const rawDef = target.def
-    target.def = Math.round(target.def * 0.8)
+    target.def = target.def * 0.8
     this.dealDmg(target, 100)
     target.def = rawDef
   }
