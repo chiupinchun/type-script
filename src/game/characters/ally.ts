@@ -53,5 +53,6 @@ export abstract class AllyCharacter extends Character {
     if (target instanceof Bug) {
       target.shieldRecieveDmg(value * (1 + this.breakShieldRate / 100))
     }
+    super.dealDmg(target, value)
   }
 }

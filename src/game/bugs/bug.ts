@@ -49,3 +49,12 @@ export abstract class Bug extends Character {
     super.handleTurnEnd()
   }
 }
+
+export class TestBug extends Bug {
+  hp = 100
+  maxHp = 100
+  _atk = 10
+  _def = 10
+  maxShield: number = 10
+  shield: number = 10
+}
