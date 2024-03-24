@@ -1,4 +1,4 @@
-import { Affix, collectAffix } from "@game/affix"
+import { Affix, collectAffix } from "@game/status"
 import { Character } from "@/types/battle"
 import { Bug } from "@game/bugs/bug"
 import { Decorator, enableDecoratorSet } from "@game/decorators"

@@ -1,11 +1,11 @@
-import { Character } from "@/types/battle"
+import { Character, ReduceOnTurnEnd } from "@/types/battle"
 
 export enum StateType {
   debuff,
   buff
 }
 
-export abstract class State {
+export abstract class State implements ReduceOnTurnEnd {
   abstract name: string
   abstract description: string
   abstract type: StateType

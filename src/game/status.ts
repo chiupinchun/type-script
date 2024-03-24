@@ -1,10 +1,8 @@
-import { Character } from "@/types/battle"
+import { Character, ReduceOnTurnEnd } from "@/types/battle"
 
-export type AffixAttr = 'maxHp' | 'atk' | 'def' | 'critical' | 'criDmg' | 'stateImposeRate' | 'stateRisistRate' | 'breakShieldRate'
+export type AffixAttr = 'maxHp' | 'atk' | 'def' | 'critical' | 'criDmg' | 'totalDmg' | 'stateImposeRate' | 'stateRisistRate' | 'breakShieldRate'
 export type AffixType = 'add' | 'percent'
 
-// TODO: it's not only used in affix, but status changes in battle.
-// maybe it should be renamed as StatusPipe.
 export interface Affix {
   attr: AffixAttr
   type: AffixType
@@ -29,4 +27,17 @@ export const calcAffix = (rawValue: number, affix: Affix) => {
 
 export const setAffix = (character: Character, affix: Affix) => {
   character[affix.attr] = calcAffix(character[affix.attr], affix)
+}
+
+export class StatusPipe implements Affix, ReduceOnTurnEnd {
+  effectTurn: number
+  constructor(
+    public readonly attr: AffixAttr,
+    public readonly type: AffixType,
+    public readonly value: number,
+    public maxEffectTurn: number,
+    public stock: number = 1
+  ) {
+    this.effectTurn = this.maxEffectTurn
+  }
 }

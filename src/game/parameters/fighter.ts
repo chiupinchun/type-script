@@ -1,5 +1,6 @@
 import { Strength } from "@game/states/buff";
 import { AffixParameter, EffectParameter, link } from ".";
+import { StatusPipe } from "@game/status";
 
 const angerParam = new EffectParameter(character => {
   const strength = new Strength()
@@ -11,8 +12,20 @@ const angerParam = new EffectParameter(character => {
 })
 
 const hardFightParam = new EffectParameter(character => {
-  character.onBeforeDmgs.push(() => {
-    // TODO
+  character.onTurnStarts.push((self) => {
+    const atkUp = new StatusPipe('atk', 'percent', 50, 1)
+    const criDmgUp = new StatusPipe('criDmg', 'percent', 50, 1)
+    const totalDmgUp = new StatusPipe('criDmg', 'percent', 50, 1)
+
+    if (self.hp <= self.maxHp / 2) {
+      self.statusPipes.add(atkUp)
+      if (self.hp <= self.maxHp / 4) {
+        self.statusPipes.add(criDmgUp)
+        if (self.hp <= self.maxHp / 20) {
+          self.statusPipes.add(totalDmgUp)
+        }
+      }
+    }
   })
 })
 

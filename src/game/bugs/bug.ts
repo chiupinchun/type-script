@@ -1,5 +1,5 @@
 import { Character } from "@/types/battle"
-import { Affix } from "@game/affix"
+import { Affix } from "@game/status"
 import { DMG_RATE_ON_SHIELD, SHIELD_RECOVER_TURN } from "@game/constants/battle-core"
 
 export abstract class Bug extends Character {
