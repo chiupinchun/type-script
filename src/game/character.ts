@@ -7,7 +7,7 @@ const calcStatus = (rawValue: number, attr: AffixAttr, pipes: Set<StatusPipe>) =
   pipes.forEach(pipe => {
     if (pipe.attr === attr) { rawValue = calcAffix(rawValue, pipe) }
   })
-  return rawValue
+  return Math.round(rawValue)
 }
 
 export abstract class Character {
