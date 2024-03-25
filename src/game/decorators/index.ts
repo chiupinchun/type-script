@@ -9,8 +9,8 @@ export abstract class Decorator {
     public affixes: Affix[]
   ) { }
 
-  abstract on2set: (character: Character) => void
-  abstract on3set: (character: Character) => void
+  abstract on2set(character: Character): void
+  abstract on3set(character: Character): void
 }
 
 export const enableDecoratorSet = (

@@ -127,6 +127,10 @@ export abstract class Character {
     this.onRecievedDmgs.forEach(fn => fn(ctx))
   }
 
+  recieveHeal(value: number) {
+    this.hp = Math.round(Math.min(this.hp + value, this.maxHp))
+  }
+
   handleTurnStart() {
     this.onTurnStarts.forEach(fn => fn(this))
   }
