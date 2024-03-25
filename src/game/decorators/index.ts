@@ -30,9 +30,9 @@ export const enableDecoratorSet = (
   })
 
   Object.values(decoratorMap).forEach(decorators => {
-    if (decorators.length > 2) {
+    if (decorators.length >= 2) {
       decorators[0].on2set(character)
-      if (decorators.length > 3) {
+      if (decorators.length >= 3) {
         decorators[0].on3set(character)
       }
     }
