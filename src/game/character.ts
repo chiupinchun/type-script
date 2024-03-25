@@ -117,7 +117,13 @@ export abstract class Character {
     }
     this.onBeforeDmgs.forEach(fn => fn(dmgCtx))
 
+    const rawHp = target.hp
+
     target.recieveDmg(dmgCtx)
+
+    const currentHp = target.hp
+    dmgCtx.dmg = rawHp - currentHp
+
     this.onDmgeds.forEach(fn => fn(dmgCtx))
   }
 
