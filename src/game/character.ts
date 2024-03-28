@@ -15,6 +15,11 @@ const calcStatus = (rawValue: number, attr: AffixAttr, pipes: Set<StatusPipe>) =
 }
 
 export abstract class Character {
+  // === ui ===
+  abstract model: string
+
+  // === core ===
+
   // basic
   hp: number = 0
   maxHp: number = 0
