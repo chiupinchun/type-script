@@ -7,17 +7,6 @@ import BattleView from './components/view'
 import Elegance from './components/elegance'
 import EnemyHp from './components/enemyHp'
 import Setting from './components/setting'
-import { SliceStr } from '@game/characters/string/slice'
-import { fighterRoute } from '@game/parameters/fighter'
-import { TestBug } from '@game/bugs/bug'
-
-const parameter = fighterRoute.last
-const sliceStr = new SliceStr(10, null, [], [parameter])
-const testBug = new TestBug()
-
-console.log(`testBug hp before recieve dmg: ${testBug.hp}`)
-sliceStr.skill(testBug)
-console.log(`testBug hp after recieve dmg: ${testBug.hp}`)
 
 interface Props { }
 

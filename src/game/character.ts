@@ -1,4 +1,4 @@
-import { getRandByRate } from "@/utils/random"
+import { getRandByRate } from "@/utils/math"
 import { State } from "./states"
 import { Affix, AffixAttr, calcAffix, setAffix, StatusPipe } from "./status"
 import { DmgCtx, DmgLifeCycle } from "@/types/battle"
