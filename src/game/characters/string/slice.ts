@@ -2,6 +2,8 @@ import { Character } from "@game/character"
 import { StringCharacter } from "."
 
 export class SliceStr extends StringCharacter {
+  model: string = '/models/magic-spirit.glb'
+
   constructor(
     ...args: ConstructorParameters<typeof StringCharacter>
   ) {
