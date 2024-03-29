@@ -1,8 +1,11 @@
 import { Character } from "@game/character"
 import { StringCharacter } from "."
+import defaultAvatar from '@/assets/images/defaultAvatar.webp'
 
 export class SliceStr extends StringCharacter {
+  avatar: string = defaultAvatar
   model: string = '/models/magic-spirit.glb'
+
 
   constructor(
     ...args: ConstructorParameters<typeof StringCharacter>
