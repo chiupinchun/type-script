@@ -5,6 +5,7 @@ import { ModelProgress } from '@app/common/hooks/useModelProgress'
 import Movable from '@app/common/components/models/character'
 import Field from '@app/common/components/models/field'
 import Grass from '@app/common/components/models/field-items/grass'
+import BasicEnv from '@app/common/components/models/basicEnv'
 
 interface Props {
   allyProgress: ModelProgress | null
@@ -17,9 +18,7 @@ const BattleView: FC<Props> = ({ allyProgress, enemyProgress }) => {
       <Canvas
         camera={{ position: RAW_CAMERA_POSITION }}
       >
-        <ambientLight intensity={Math.PI / 2} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
-        <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
+        <BasicEnv />
 
         <Movable
           src='/models/slime.glb'

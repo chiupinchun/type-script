@@ -1,3 +1,7 @@
+import { expToLv } from "@/utils/character"
+import { characters } from "@game/characters"
+import { AllyCharacter } from "@game/characters/ally"
+
 export const getCharactersByUser = (userId: string) => {
   userId
   return Promise.resolve([
@@ -9,21 +13,31 @@ export const getCharactersByUser = (userId: string) => {
   ])
 }
 
-export const getCharacterById = (characterId: number) => {
+export const getCharacterById = (id: number): Promise<AllyCharacter> => {
   const mock1 = {
-    characterId: 1,
+    id: 1,
     exp: 2000,
     catching: null,
     decorators: [],
     parameters: []
   }
   const mock2 = {
-    characterId: 2,
+    id: 2,
     exp: 2000,
     catching: null,
     decorators: [],
     parameters: []
   }
 
-  return Promise.resolve(characterId % 2 ? mock1 : mock2)
+  return Promise.resolve(id % 2 ? mock1 : mock2)
+    .then(res => {
+      const { id, exp, catching, decorators, parameters } = res
+      const Character = characters[id]
+      return new Character(
+        expToLv(exp).lv,
+        catching,
+        decorators,
+        parameters
+      )
+    })
 }

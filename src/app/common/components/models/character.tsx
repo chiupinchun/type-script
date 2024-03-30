@@ -1,4 +1,4 @@
-import { ModelProgress } from '@/hooks/useModelProgress'
+import { ModelProgress } from '@app/common/hooks/useModelProgress'
 import { useAnimations, useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import React, { FC, useEffect, useRef } from 'react'
