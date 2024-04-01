@@ -3,10 +3,12 @@ import { StringCharacter } from "."
 import defaultAvatar from '@/assets/images/defaultAvatar.webp'
 
 export class SliceStr extends StringCharacter {
+  static avatar: string = defaultAvatar
   avatar: string = defaultAvatar
-  public static avatar: string = defaultAvatar
-  model: string = '/models/magic-spirit.glb'
   static model: string = '/models/magic-spirit.glb'
+  model: string = '/models/magic-spirit.glb'
+  static name = '史萊斯'
+  name = '史萊斯'
 
   constructor(
     ...args: ConstructorParameters<typeof StringCharacter>

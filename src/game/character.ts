@@ -18,6 +18,7 @@ export abstract class Character {
   // === ui ===
   abstract avatar: string
   abstract model: string
+  abstract name: string
 
   // === core ===
 
