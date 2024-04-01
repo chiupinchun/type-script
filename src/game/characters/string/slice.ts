@@ -4,8 +4,9 @@ import defaultAvatar from '@/assets/images/defaultAvatar.webp'
 
 export class SliceStr extends StringCharacter {
   avatar: string = defaultAvatar
+  public static avatar: string = defaultAvatar
   model: string = '/models/magic-spirit.glb'
-
+  static model: string = '/models/magic-spirit.glb'
 
   constructor(
     ...args: ConstructorParameters<typeof StringCharacter>

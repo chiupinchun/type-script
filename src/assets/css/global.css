@@ -5,6 +5,11 @@
 .btn {
   @apply p-2 w-max border text-center hover:bg-slate-200 hover:bg-opacity-20;
 }
+
+.btn.small {
+  @apply p-1;
+}
+
 .btn.large {
   @apply p-5 md:p-10;
 }
@@ -12,6 +17,23 @@
 .hp-bar {
   @apply border rounded;
 }
+
 .hp-bar>div {
   @apply bg-red-500 h-full rounded;
+}
+
+@layer utilities {
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
 }

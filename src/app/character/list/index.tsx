@@ -4,6 +4,7 @@ import Exhibition from './components/exhibition'
 import { getCharacterById, getCharactersByUser } from '@/api/modules/character'
 import { useFetch } from '@app/common/hooks/useFetch'
 import { useSearchParams } from 'react-router-dom'
+import CharacterInfo from './components/info'
 
 interface Props { }
 
@@ -17,7 +18,7 @@ const CharacterList: FC<Props> = () => {
   const currentId = useMemo(() => {
     const searchParamsId = searchParams.get('id')
     if (searchParamsId) { return Number(searchParamsId) }
-    return characters.data?.[0]?.id || null
+    return characters.data?.[0]?.characterId || null
   }, [searchParams, characters.data])
 
   const character = useFetch(
@@ -31,17 +32,22 @@ const CharacterList: FC<Props> = () => {
     )
   }
 
-
   return (
     <>
       <main className='relative flex h-screen'>
-        <AvatarList />
+        <AvatarList
+          data={characters.data ?? []}
+          onChange={id => {
+            searchParams.set('id', id)
+            setSearchParams(searchParams)
+          }}
+        />
         {
           character?.data
             ? <Exhibition src={character.data.model} />
             : <div>找不到該角色QwQ</div>
         }
-        <div>info</div>
+        <CharacterInfo />
       </main>
     </>
   )
