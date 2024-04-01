@@ -67,6 +67,9 @@ export abstract class Bug extends Character {
 }
 
 export class TestBug extends Bug {
+  avatar: string = ''
+  model: string = ''
+  name = '測試'
   hp = 9999999
   maxHp = 9999999
   _atk = 10
