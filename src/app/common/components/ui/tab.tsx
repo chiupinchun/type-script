@@ -6,14 +6,15 @@ interface Props {
   value?: string
   onChange?: (option: string) => void
   children?: React.ReactNode
+  className?: string
 }
 
-const Tab: FC<Props> = ({ options, value, onChange, children }) => {
+const Tab: FC<Props> = ({ options, value, onChange, children, className }) => {
 
   return (
     <>
-      <div className='pt-1 w-1/2'>
-        <ul className='flex space-x-3 min-w-full overflow-x-auto border-b no-scrollbar'>
+      <div className={twMerge('pt-1', className)}>
+        <ul className='flex min-w-full overflow-x-auto border-b no-scrollbar'>
           {options.map((option, idx) => (
             <li key={idx}>
               <a
@@ -26,7 +27,7 @@ const Tab: FC<Props> = ({ options, value, onChange, children }) => {
             </li>
           ))}
         </ul>
-        {children}
+        <div className='px-3 py-2'>{children}</div>
       </div>
     </>
   )

@@ -28,7 +28,7 @@ const CharacterItem: FC<{
           {character instanceof ArrayCharacter && 'arr'}
         </span>
         <Avatar src={character.avatar} />
-        <h5>{character.name}</h5>
+        <h5 className='text-sm text-gray-100'>{character.name}</h5>
       </div>
     </>
   )
@@ -42,7 +42,7 @@ const AvatarList: FC<Props> = ({ data, onChange }) => {
       <aside className='fixed z-10 h-full p-4 bg-slate-700 bg-opacity-50 overflow-y-scroll no-scrollbar'>
         <ul className={twMerge(
           'grid grid-cols-2 gap-4 w-fit h-fit transition-all',
-          collapsed ? 'w-0' : 'pe-6 w-32'
+          collapsed ? 'w-0 scale-x-0' : 'pe-6 w-32'
         )}>
           {data.map(item => (
             <li key={item.id} onClick={() => onChange(`${item.id}`)}>

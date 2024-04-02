@@ -27,7 +27,7 @@ const Exhibition: FC<Props> = ({ ...props }) => {
 
   return (
     <>
-      <div className='w-1/2 h-full'>
+      <div className='w-2/5 h-full'>
         <Canvas
           camera={{
             position: [0, 1, -3]

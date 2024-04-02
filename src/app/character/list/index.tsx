@@ -34,7 +34,7 @@ const CharacterList: FC<Props> = () => {
 
   return (
     <>
-      <main className='relative flex h-screen'>
+      <main className='relative flex justify-between h-screen'>
         <AvatarList
           data={characters.data ?? []}
           onChange={id => {
@@ -47,7 +47,7 @@ const CharacterList: FC<Props> = () => {
             ? <Exhibition src={character.data.model} />
             : <div>找不到該角色QwQ</div>
         }
-        <CharacterInfo />
+        {character.data && <CharacterInfo character={character.data} />}
       </main>
     </>
   )
