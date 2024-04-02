@@ -27,7 +27,7 @@ const Tab: FC<Props> = ({ options, value, onChange, children, className }) => {
             </li>
           ))}
         </ul>
-        <div className='px-3 py-2'>{children}</div>
+        <div className='relative mx-3 my-2'>{children}</div>
       </div>
     </>
   )
