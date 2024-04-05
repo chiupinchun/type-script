@@ -41,8 +41,8 @@ const AvatarList: FC<Props> = ({ data, onChange }) => {
     <>
       <aside className='fixed z-10 h-full p-4 bg-slate-700 bg-opacity-50 overflow-y-scroll no-scrollbar'>
         <ul className={twMerge(
-          'grid grid-cols-2 gap-4 w-fit h-fit transition-all',
-          collapsed ? 'w-0 scale-x-0' : 'pe-6 w-32'
+          'grid grid-cols-2 gap-4 w-fit h-fit overflow-hidden transition-all',
+          collapsed ? 'w-0' : 'pe-6 w-32'
         )}>
           {data.map(item => (
             <li key={item.id} onClick={() => onChange(`${item.id}`)}>
