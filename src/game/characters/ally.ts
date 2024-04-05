@@ -1,6 +1,6 @@
 import { Affix, collectAffix } from "@game/status"
 import { Bug } from "@game/bugs/bug"
-import { Decorator, enableDecoratorSet } from "@game/decorators"
+import { Decorator, enableDecoratorSet } from "@game/decorators/decorator"
 import { Parameter } from "@game/parameters/parameter"
 import { Character } from "@game/character"
 

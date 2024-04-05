@@ -1,4 +1,4 @@
-import { Decorator } from '@game/decorators'
+import { Decorator } from '@game/decorators/decorator'
 import React, { FC, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { twMerge } from 'tailwind-merge'

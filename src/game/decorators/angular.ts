@@ -1,5 +1,5 @@
 import { Character } from "@game/character";
-import { Decorator } from ".";
+import { Decorator } from "./decorator";
 
 export class AngularModule extends Decorator {
   name: string = '安古拉模組'
