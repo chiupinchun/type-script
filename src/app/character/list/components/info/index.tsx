@@ -2,8 +2,9 @@ import Tab from '@app/common/components/ui/tab'
 import { AllyCharacter } from '@game/characters/ally'
 import React, { FC, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import Base from './base'
+import CharacterBaseInfo from './base'
 import { twMerge } from 'tailwind-merge'
+import CharacterDecorator from './decorator'
 
 enum TabOptions {
   base = '詳情',
@@ -38,34 +39,34 @@ const CharacterListTab: FC<Props> = ({ character }) => {
         className='w-1/2 overflow-hidden'
       >
         <div className={twMerge(
-          'absolute transition-all',
+          'absolute transition-all w-full',
           tab === TabOptions.base ? 'left-0 opacity-100' : 'left-[100vw] opacity-0'
         )}>
-          <Base character={character} />
+          <CharacterBaseInfo character={character} />
         </div>
         <div className={twMerge(
-          'absolute transition-all',
+          'absolute transition-all w-full',
           tab === TabOptions.catching ? 'left-0 opacity-100' : 'left-[100vw] opacity-0'
         )}>
           努力開發中(。-`ω-)ノ
         </div>
         <div className={twMerge(
-          'absolute transition-all',
+          'absolute transition-all w-full',
           tab === TabOptions.decorator ? 'left-0 opacity-100' : 'left-[100vw] opacity-0'
         )}>
-          <Base character={character} />
+          <CharacterDecorator decorators={character.decorators} />
         </div>
         <div className={twMerge(
-          'absolute transition-all',
+          'absolute transition-all w-full',
           tab === TabOptions.parameter ? 'left-0 opacity-100' : 'left-[100vw] opacity-0'
         )}>
-          <Base character={character} />
+          <CharacterBaseInfo character={character} />
         </div>
         <div className={twMerge(
-          'absolute transition-all',
+          'absolute transition-all w-full',
           tab === TabOptions.story ? 'left-0 opacity-100' : 'left-[100vw] opacity-0'
         )}>
-          <Base character={character} />
+          <CharacterBaseInfo character={character} />
         </div>
       </Tab>
     </>

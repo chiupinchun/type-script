@@ -1,6 +1,7 @@
 import { expToLv } from "@/utils/character"
 import { characters } from "@game/characters"
 import { AllyCharacter } from "@game/characters/ally"
+import { AngularModule } from "@game/decorators/angular"
 
 export interface CharacterInList {
   id: number
@@ -37,14 +38,20 @@ export const getCharacterById = (id: number): Promise<AllyCharacter> => {
     id: 1,
     exp: 2000,
     catching: null,
-    decorators: [],
+    decorators: [new AngularModule([
+      { attr: 'atk', type: 'add', value: 5 },
+      { attr: 'atk', type: 'percent', value: 5 }
+    ])],
     parameters: []
   }
   const mock2 = {
     id: 2,
     exp: 2000,
     catching: null,
-    decorators: [],
+    decorators: [new AngularModule([
+      { attr: 'atk', type: 'add', value: 5 },
+      { attr: 'atk', type: 'percent', value: 5 }
+    ])],
     parameters: []
   }
 

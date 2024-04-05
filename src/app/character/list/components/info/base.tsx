@@ -7,7 +7,7 @@ interface Props {
   character: AllyCharacter
 }
 
-const Page: FC<Props> = ({ character }) => {
+const CharacterBaseInfo: FC<Props> = ({ character }) => {
 
   return (
     <>
@@ -53,4 +53,4 @@ const Page: FC<Props> = ({ character }) => {
   )
 }
 
-export default Page
+export default CharacterBaseInfo

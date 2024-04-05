@@ -8,7 +8,7 @@ export class AngularModule extends Decorator {
     effect: (character: Character) => {
       character.atk *= 1.15
     },
-    description: ''
+    description: '攻擊力提升15%。'
   }
   on3set = {
     effect: (character: Character) => {
@@ -16,6 +16,6 @@ export class AngularModule extends Decorator {
         character.recieveHeal(ctx.dmg / 20)
       })
     },
-    description: ''
+    description: '造成傷害時，回復造成傷害5%的生命。'
   }
 }
