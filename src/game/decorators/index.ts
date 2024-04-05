@@ -2,15 +2,21 @@ import { Affix } from "@game/status";
 import { AllyCharacter } from "@game/characters/ally";
 import { Character } from "@game/character";
 
+interface DecoratorSet {
+  effect: (character: Character) => void
+  description: string
+}
+
 export abstract class Decorator {
   abstract name: string
+  abstract color: string
 
   constructor(
     public affixes: Affix[]
   ) { }
 
-  abstract on2set(character: Character): void
-  abstract on3set(character: Character): void
+  abstract on2set: DecoratorSet
+  abstract on3set: DecoratorSet
 }
 
 export const enableDecoratorSet = (
@@ -31,9 +37,9 @@ export const enableDecoratorSet = (
 
   Object.values(decoratorMap).forEach(decorators => {
     if (decorators.length >= 2) {
-      decorators[0].on2set(character)
+      decorators[0].on2set.effect(character)
       if (decorators.length >= 3) {
-        decorators[0].on3set(character)
+        decorators[0].on3set.effect(character)
       }
     }
   })

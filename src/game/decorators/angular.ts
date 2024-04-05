@@ -3,12 +3,19 @@ import { Decorator } from ".";
 
 export class AngularModule extends Decorator {
   name: string = '安古拉模組'
-  on2set(character: Character): void {
-    character.atk *= 1.15
+  color: string = '#632726';
+  on2set = {
+    effect: (character: Character) => {
+      character.atk *= 1.15
+    },
+    description: ''
   }
-  on3set(character: Character): void {
-    character.onDmgeds.push((ctx) => {
-      character.recieveHeal(ctx.dmg / 20)
-    })
+  on3set = {
+    effect: (character: Character) => {
+      character.onDmgeds.push((ctx) => {
+        character.recieveHeal(ctx.dmg / 20)
+      })
+    },
+    description: ''
   }
 }
